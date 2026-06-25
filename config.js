@@ -26,8 +26,8 @@ root.style.setProperty("--body-font-family",   config.body_font_family);
 root.style.setProperty("--mono-font-family",   config.code_font_family);
 
 document.querySelector("footer").innerHTML = `
-  <a href="./index.html#final-project">Work</a>
-  <a href="./about.html">About</a>
+  <a href="../index.html#final-project">Work</a>
+  <a href="../about.html">About</a>
 
   <div id="contact-info">
     <a href="mailto:${config.student_email}">${config.student_email}</a>
