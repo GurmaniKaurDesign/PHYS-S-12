@@ -25,14 +25,31 @@ root.style.setProperty("--font-family",        config.font_family);
 root.style.setProperty("--body-font-family",   config.body_font_family);
 root.style.setProperty("--mono-font-family",   config.code_font_family);
 
-document.querySelector("footer").innerHTML = `
-  <a href="../index.html#final-project">Work</a>
-  <a href="../about.html">About</a>
+document.querySelectorAll('footer').forEach(footer => {
+  let html;
 
-  <div id="contact-info">
-    <a href="mailto:${config.student_email}">${config.student_email}</a>
-  </div>
-`;
+  if (footer.id === 'root-footer') {
+    html = `
+      <a href="./index.html#final-project">Work</a>
+      <a href="./about.html">About</a>
+
+      <div id="contact-info">
+        <a href="mailto:${config.student_email}">${config.student_email}</a>
+      </div>
+    `;
+  } else {
+    html = `
+      <a href="../index.html#final-project">Work</a>
+      <a href="../about.html">About</a>
+
+      <div id="contact-info">
+        <a href="mailto:${config.student_email}">${config.student_email}</a>
+      </div>
+    `;
+  }
+
+  footer.innerHTML = html;
+});
 
 document.querySelectorAll('#student-name').forEach(el => {
   el.innerHTML = `${config.student_name}`;
