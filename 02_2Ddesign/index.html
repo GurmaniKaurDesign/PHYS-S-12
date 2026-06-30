@@ -1,39 +1,436 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 2 · 2D/3D Design</title>
+  <link rel="stylesheet" href="../style.css">
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <style>
+    .iteration-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      margin: 2rem 0;
+    }
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+    .iteration-card {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      overflow: hidden;
+    }
 
-  <body>
-    <section class="blog">
-      <h1>Week 2: 2D/3D Design</h1>
-      
+    .iteration-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .iteration-card .card-body {
+      padding: 1.25rem 1.5rem;
+    }
+
+    .iteration-card .attempt-tag {
+      font-family: var(--mono-font-family);
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.4rem;
+    }
+
+    .iteration-card h3 {
+      font-family: var(--font-family);
+      font-size: 1.4rem;
+      font-weight: 400;
+      font-style: italic;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--text-color);
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
+
+    .iteration-card p {
+      font-size: 0.88rem;
+      margin-bottom: 0;
+      max-width: none;
+    }
+
+    .status-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .status-badge.failed {
+      background-color: #f0d0d0;
+      color: #8a1f1f;
+    }
+
+    .status-badge.learning {
+      background-color: var(--secondary-color);
+      color: var(--accent-color);
+    }
+
+    .status-badge.success {
+      background-color: #d8e8d0;
+      color: #2f5a2f;
+    }
+
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .concept-highlight p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    .final-hero {
+      margin: 2rem 0;
+    }
+
+    .final-hero img,
+    .final-hero video {
+      width: 100%;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .tutorial-credit {
+      font-size: 0.85rem;
+      color: var(--accent-color);
+      font-family: var(--mono-font-family);
+    }
+  </style>
+</head>
+
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
+
+<body>
+  <section class="blog">
+
+    <p class="blog-meta">Week 02 · 2D / 3D Design · June 29th 2026</p>
+    <h1>The Box That<br>Lifts Its Own Lid</h1>
+
+    <p>
+      This week's design brief: design a finger-jointed storage box using 
+      laser cutting. What started as a simple cardboard template became 
+      a gear-lifted lid with an internally lit, perforated pattern — 
+      six attempts in the making.
+    </p>
+
+    <div class="concept-highlight">
       <p>
-        You have three assignments: design a cardboard box, work through a Fusion 360 tutorial, and model some household objects or components from the lab. Include some pictures and downloads to your 3D models.
+        Concept: A storage box where two interlocking gears raise the lid 
+        when turned, with a lattice-cut pattern on the sides that lets 
+        light bleed out from the inside, creating a visually engaging 
+        and functional piece. It is a box that aesthetically blends form and function.
       </p>
-      
-      <h2>Box Design</h2>
+    </div>
 
-      <p>This is how you create <a href="./Assets/example_part.stl" download>a link to download a file</a>.</p>
+    <!-- FINAL RESULT -->
+    <h2>Final Result</h2>
+    <p>
+      The completed box: a gear-lifted lid, a perforated side pattern, 
+      and LEDs wired along the inner border, controlled by an Arduino 
+      Uno R3 following a tutorial from 
+      <a href="https://randomnerdtutorials.com" target="_blank" rel="noopener">RandomNerdTutorials</a>.
+    </p>
 
-      <h2>Fusion 360 Tutorial</h2>
-      
-      <h2>CAD Practice</h2>
-    </section>
-  </body>
+    <div class="final-hero">
+      <img src="../placeholder_assets/box_final.jpg" alt="Final laser-cut storage box with gear-lifted lid and LED lighting">
+      <p class="caption">Final box — gear-lifted lid, lit from inside</p>
 
-  <footer>See config.js</footer>
+      <video controls muted loop playsinline>
+        <source src="../placeholder_assets/box_final_video.mp4" type="video/mp4">
+      </video>
+      <p class="caption">Gear mechanism lifting the lid, LEDs lit via Arduino Uno R3</p>
+    </div>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <h3>Electronics</h3>
+    <p>
+      LEDs were placed along the interior border of the box, wired to 
+      an Arduino Uno R3 following the 
+      <a href="https://randomnerdtutorials.com" target="_blank" rel="noopener">RandomNerdTutorials</a> 
+      guide for basic LED control. The light filters out through the 
+      perforated lattice pattern on the sides, lighting up the cuts 
+      and creating a visually engaging effect.
+    </p>
+
+    <!-- DXF / cut file -->
+    <h3>Cut File</h3>
+    <p>
+      The flat pattern includes the box body with finger joints, 
+      perforated side panels, and the two interlocking gears for 
+      the lid mechanism.
+    </p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/template.png" alt="Laser Cut Pattern">
+      <img src="../placeholder_assets/materials.png" alt="All materials required">
+    </div>
+    <p class="caption">Left: Laser Cut Pattern — flat pattern showing box panels, perforation lattice, and plywood gears· Right: All materials required</p>
+
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/PHYS-Storage_Box.dxf" download>
+        ↓ Download DXF File
+      </a>
+    </div>
+
+    <!-- PROCESS -->
+    <h2>Process - Six Iterations</h2>
+    <p>
+      Every iteration taught something. Here's the honest account 
+      of what worked, what didn't, and what changed each time.
+    </p>
+
+    <!-- Moodboards -->
+    <h3>Research & Inspiration</h3>
+    <p>
+      My process began with two moodboards guiding the direction - one exploring woodworking 
+      joinery and craft precedents, the other mapping out specific 
+      laser-cutting techniques to experiment with.
+    </p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/Lab_2_1.jpg" alt="Moodboard 1 — joinery and craft references">
+      <img src="../placeholder_assets/Lab_2_2.jpg" alt="Moodboard 2 — laser cut techniques">
+    </div>
+    <p class="caption">Left: joinery and craft references · Right: laser cut technique explorations</p>
+
+    <div class="iteration-grid">
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/upload.jpg" alt="Attempt 1">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 01</p>
+          <span class="status-badge failed">Too small</span>
+          <h3>The Template Test</h3>
+          <p>
+            I started with the base template straight from the assignment. 
+            I cut it to test finger joints, but the scale was completely 
+            wrong for a shoebox-size storage piece. It needed to be significantly 
+            scaled up before anything else could be explored.
+          </p>
+        </div>
+      </div>
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/upload.jpg" alt="Attempt 2">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 02</p>
+          <span class="status-badge failed">Concept not resolved</span>
+          <h3>The Flexible Lid</h3>
+          <p>
+            I scaled up the box and tried a perforated flexible lid in cardboard. 
+            The flexibility worked mechanically but felt underwhelming in cardboard — 
+            not exciting enough as a material. The concept needed to push further.
+          </p>
+        </div>
+      </div>
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/Cardboard_gears.png" alt="Attempt 3">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 03</p>
+          <span class="status-badge learning">Concept unlocked</span>
+          <h3>Cardboard Gears</h3>
+          <p>
+            First full concept test — pattern cuts on the sides, 
+            cardboard gear mechanism for the lid. The pattern looked 
+            promising, but cardboard gears could not handle the weight 
+            of the lid at full scale.
+          </p>
+        </div>
+      </div>
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/Plywood_gears.png" alt="Attempt 4">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 04</p>
+          <span class="status-badge learning">Material upgrade</span>
+          <h3>Plywood Gears</h3>
+          <p>
+            Fleshed-out pattern on the sides, switched to plywood gears 
+            for the mechanism. Stronger, but the rest of the box was 
+            still cardboard — a mismatch that needed addressing.
+          </p>
+        </div>
+      </div>
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/upload.jpg" alt="Attempt 5">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 05</p>
+          <span class="status-badge failed">Structural failure</span>
+          <h3>Press-Fit, Plywood Lid</h3>
+          <p>
+            Tried making the whole box press-fit with a plywood lid. 
+            The lid was too heavy for the cardboard body to support - 
+            it broke under the weight.
+          </p>
+        </div>
+      </div>
+
+      <div class="iteration-card">
+        <img src="../placeholder_assets/upload.jpg" alt="Attempt 6">
+        <div class="card-body">
+          <p class="attempt-tag">Attempt 06</p>
+          <span class="status-badge success">Final build</span>
+          <h3>Plywood + LEDs</h3>
+          <p>
+            Dialed back to a cardboard body to comply with the assignment,
+            but kept plywood gears and changed their placement. 
+            With the gear mechanism holding properly, I wired an
+            LED strip along the interior border via an Arduino Uno R3. 
+            Light filters through the perforated pattern achieving the
+            desired effect.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+<h2>CAD Practice</h2>
+<p>
+  Two objects modelled in SolidWorks to practice split-body composition, 
+  assemblies, and technical drawing conventions.
+</p>
+
+<!-- CAD PIECE 1: SCANNER -->
+<h3>Barcode Scanner — Split Body Composition</h3>
+<p>
+  Modelled from a barcode scanner donated by the Pratt Brooklyn Public 
+  Library, where I used to work. Practiced splitting a single solid body 
+  into manufacturable components — outer shell, inner shell, PCB, and 
+  lens — then exploding the assembly to show how the parts fit together.
+</p>
+<p class="tutorial-credit">Software: SolidWorks</p>
+
+<!-- Interactive 3D viewer — drag to orbit, scroll to zoom -->
+<model-viewer 
+  src="../placeholder_assets/Gurmani_Kaur_Split_Body_Composition_Exploded_View.glb" 
+  alt="Barcode scanner exploded view — drag to orbit"
+  auto-rotate 
+  camera-controls 
+  shadow-intensity="1"
+  style="width:100%; aspect-ratio:4/3; background-color: var(--secondary-color); border-radius:4px; margin-bottom:0.5rem;">
+</model-viewer>
+<p class="caption">Drag to orbit · scroll to zoom · click to pause auto-rotate</p>
+
+<div class="img-duo">
+  <img src="../placeholder_assets/Scanner_AI_Render.png" alt="Barcode scanner — AI render, exploded view">
+  <img src="../placeholder_assets/Scanner_Exploded_View.png" alt="Barcode scanner — SolidWorks exploded view">
+</div>
+<p class="caption">Left: AI-rendered exploded view · Right: SolidWorks exploded view</p>
+
+<div class="download-row">
+  <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Split_Body_Composition.SLDASM" download>
+    ↓ Assembly (.SLDASM)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Split_Body_Composition_Exploded_View.SLDASM" download>
+    ↓ Exploded View Assembly (.SLDASM)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Split_Body_Composition.SLDPRT" download>
+    ↓ Main Part (.SLDPRT)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Outer_Shell_Above.SLDPRT" download>
+    ↓ Outer Shell — Above (.SLDPRT)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Outer_Shell_Below.SLDPRT" download>
+    ↓ Outer Shell — Below (.SLDPRT)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Inside.SLDPRT" download>
+    ↓ Inner Shell (.SLDPRT)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Inside_up.SLDPRT" download>
+    ↓ Inner Shell — Upper (.SLDPRT)
+  </a>
+  <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Split_Body_Composition_Technical_Drawing.PDF" download>
+    ↓ Technical Drawing (.PDF)
+  </a>
+</div>
+<p class="caption">
+  Note: download all part files into the same folder to open the assembly correctly in SolidWorks
+</p>
+
+<!-- CAD PIECE 2: MIXER -->
+<h3>Mixer</h3>
+<p>
+  A handheld mixer modelled in SolidWorks, focused on ergonomic 
+  handle design and surfacing continuity across the body.
+</p>
+<p class="tutorial-credit">Software: SolidWorks</p>
+
+<model-viewer 
+  src="../placeholder_assets/Gurmani_Kaur_Mixer.glb" 
+  alt="Mixer 3D model — drag to orbit"
+  auto-rotate 
+  camera-controls 
+  shadow-intensity="1"
+  style="width:100%; aspect-ratio:4/3; background-color: var(--secondary-color); border-radius:4px; margin-bottom:0.5rem;">
+</model-viewer>
+<p class="caption">Drag to orbit · scroll to zoom · click to pause auto-rotate</p>
+
+<div class="img-duo">
+  <img src="../placeholder_assets/Mixer_1.png" alt="Mixer — AI render, exploded view">
+  <img src="../placeholder_assets/Mixer_2.png" alt="Mixer — SolidWorks exploded view">
+</div>
+<p class="caption">Left: AI-rendered exploded view · Right: SolidWorks exploded view</p>
+
+<div class="download-row">
+  <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Mixer.SLDPRT" download>
+    ↓ Download Part (.SLDPRT)
+  </a>
+</div>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
