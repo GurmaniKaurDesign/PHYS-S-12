@@ -1,34 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 3 · Fabrication</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .mechanism-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin: 2rem 0;
+      align-items: start;
+    }
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+    .mechanism-block {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+    }
 
-  <body>
-    <section class="blog">
-      <h1>Week 3: Fabrication</h1>
+    .mechanism-block h3 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+    }
 
-      <p>Create a kinetic sculpture that contains circuitry. Make sure to include at least one video/gif in your documentation.</p>
-      
-      <video controls>
-        <source src="./Assets/example_video.mp4" type="video/mp4">
+    .mechanism-block p {
+      margin-bottom: 0;
+      font-size: 0.9rem;
+      max-width: none;
+    }
+
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+
+    .step-content h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+
+    .step-content p {
+      margin-bottom: 0.75rem;
+      max-width: none;
+    }
+
+    .step-content img,
+    .step-content video {
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .concept-highlight p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+
+    .final-hero img,
+    .final-hero video {
+      width: 100%;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+
+    @media (max-width: 768px) {
+      .mechanism-grid { grid-template-columns: 1fr; }
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
+
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
+
+<body>
+  <section class="blog">
+
+    <p class="blog-meta">Week 03 · Fabrication · July 2026</p>
+    <h1>Skip</h1>
+
+    <div class="concept-highlight">
+      <p>
+        A desk kinetic that converts a DC motor's rotation into the 
+        eternal optimism of a girl who never misses a beat. A reminder 
+        that time doesn't wait — but it does have rhythm.
+      </p>
+    </div>
+
+    <p>
+      A skipping rope is about timing and persistence. You can't skip 
+      without committing to the next jump before the last one lands. 
+      Time works the same way. Skip is a small kinetic sculpture that 
+      hangs off the edge of your desk — a laser-cut girl perpetually 
+      in motion, spinning her rope as the hours pass. She doesn't stop. 
+      Neither should you.
+    </p>
+
+    <!--  FINAL RESULT -->
+    <h2>Final Result</h2>
+
+    <div class="final-hero">
+      <video controls muted loop playsinline>
+        <source src="../placeholder_assets/skip_final_video.mp4" type="video/mp4">
       </video>
-      
-    </section>
-  </body>
+      <p class="caption">Skip — desk kinetic sculpture, DC motor driven</p>
 
-  <footer>See config.js</footer>
+      <img src="../placeholder_assets/skip_final.jpeg" 
+           alt="Skip — laser cut girl skipping rope, desk kinetic sculpture">
+      <p class="caption">Final assembled sculpture hanging off desk edge</p>
+    </div>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <!-- MECHANISM  -->
+    <h2>The Mechanism</h2>
+    <p>
+      The core engineering challenge: a DC motor produces continuous 
+      <strong>rotational motion</strong>, but making a figure appear to 
+      skip requires <strong>oscillating vertical movement</strong> — 
+      the classic problem of converting one type of motion into another.
+    </p>
+
+    <div class="mechanism-grid">
+      <div class="mechanism-block">
+        <h3>Crank-Slider Principle</h3>
+        <p>
+          The wire (representing the skipping rope) acts as a crank arm 
+          attached to the motor shaft. As the motor rotates, the wire 
+          sweeps a circular path — but the figure's attachment point, 
+          constrained by the nozzle, converts that rotation into 
+          an up-and-down oscillation. One continuous spin becomes 
+          one perpetual jump.
+        </p>
+      </div>
+
+      <div class="mechanism-block">
+        <h3>The Spinning Nozzle</h3>
+        <p>
+          A spinning nozzle bearing allows the wire to rotate freely 
+          without tangling around itself. This was a critical detail — 
+          without it, the wire would twist, bind, and stop within 
+          seconds. The nozzle decouples the spin from the figure, 
+          letting each move independently.
+        </p>
+      </div>
+
+      <div class="mechanism-block">
+        <h3>DC Motor</h3>
+        <p>
+          A DC motor was used for its simplicity and continuous 
+          rotation at a consistent speed — no need for step control 
+          or feedback, just a steady rhythm. The speed determines 
+          the "pace" of the skip, tuned to feel natural rather 
+          than frantic.
+        </p>
+      </div>
+
+      <div class="mechanism-block">
+        <h3>Desk Mount</h3>
+        <p>
+          The sculpture is designed to hang off the edge of a desk, 
+          keeping the motor body on top and the figure suspended below. 
+          Gravity assists the downward stroke, while the motor's 
+          rotation provides the upward lift — a small collaboration 
+          between physics and mechanism.
+        </p>
+      </div>
+    </div>
+<!--
+    <img src="../placeholder_assets/skip_mechanism.jpg" 
+         alt="Mechanism diagram — crank slider conversion">
+    <p class="caption">Rotational → oscillating motion conversion via crank-slider mechanism</p>
+  -->
+    <!-- PROCESS -->
+    <h2>Process</h2>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Concept & Sketch</h3>
+        <p>
+          Started with the idea of a desk object that has just enough 
+          life to make you smile — something with rhythm. A skipping 
+          figure felt right: familiar, joyful, perpetually optimistic. 
+          The challenge was keeping the mechanism simple enough to 
+          build in a week while still feeling alive in motion.
+        </p>
+        <img src="../placeholder_assets/skip_sketch.jpeg" alt="Initial concept sketch">
+        <p class="caption">Early sketches exploring the mechanism and mounting</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Laser Cut Figure</h3>
+        <p>
+          The girl silhouette was drawn as a DXF and cut on the laser 
+          cutter. The design needed to be readable at small scale — 
+          clear enough to read as a jumping figure, light enough not 
+          to overload the motor's torque.
+        </p>
+        <img src="../placeholder_assets/skip_lasercut.jpeg" 
+             alt="Laser cut girl silhouette">
+        <p class="caption">Laser-cut figure — designed for legibility at small scale</p>
+
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Model.dxf" download>
+            ↓ Download Figure DXF
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Materials</h3>
+        <img src="../placeholder_assets/skip_materials.jpg" 
+             alt="All materials laid out">
+        <p class="caption">
+          DC motor · wire · laser-cut figure · spinning nozzle 
+          · mounting hardware · acrylic sheet
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>Assembly</h3>
+        <p>
+          Attaching the wire to the motor shaft at the right offset 
+          was the trickiest part — too short and the arc was too 
+          small to read as a skip, too long and the figure swung 
+          wildly. Found the sweet spot through iteration.
+        </p>
+      <video controls muted loop playsinline>
+        <source src="../placeholder_assets/skip_failure_video.mp4" type="video/mp4">
+      </video>
+      <p class="caption">Failure- Figure swinging wildly with the wire</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">05</p>
+      <div class="step-content">
+        <h3>Circuitry</h3>
+        <p>
+          The DC motor is wired to a basic circuit with a power supply 
+          and switch. No microcontroller needed — the motor runs 
+          continuously at a fixed voltage, keeping the mechanism 
+          as simple and reliable as possible.
+        </p>
+        <img src="../placeholder_assets/skip_assembly.jpeg" 
+             alt="Wiring and circuitry">
+        <p class="caption">Simple DC motor circuit — power, switch, motor</p>
+      </div>
+    </div>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
