@@ -1,35 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 4 · Microcontroller Programming</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .code-block {
+      background: var(--secondary-color);
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre;
+    }
+    .circuit-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .circuit-block {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+    }
+    .circuit-block h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .circuit-block p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      max-width: none;
+    }
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+    .wiring-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .wiring-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .wiring-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+    }
+    .wiring-table tr:last-child td { border-bottom: none; }
+    .next-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: #f0e6c8;
+      color: #8a6a1f;
+      margin-left: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .circuit-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 4: Programming</h1>
+<body>
+  <section class="blog">
 
+    <p class="blog-meta">Week 04 · Microcontroller Programming · July 2026</p>
+    <h1>Embrace<br>Proof of Concept</h1>
+
+    <div class="concept-highlight">
       <p>
-        Program your Xiao to do something. Explain how your code works and link any tutorials or resources you used. Record a video, include code snippets, and draw a schematic of your circuit.
+        Week 4's programming assignment became a preliminary test 
+        for Embrace — the self-sizing neck brace I'm developing as 
+        my final project. It is a closed-loop system: a handmade pressure 
+        sensor tells the Arduino how tight the brace is, and the 
+        Arduino controls a pump to inflate a McKibben actuator until 
+        the fit is correct.
       </p>
+    </div>
+
+<p>
+  The Harvard lab didn't stock two key components I needed — 
+  a Force Sensitive Resistor (FSR) and a McKibben pneumatic 
+  actuator. Rather than redesign around their absence, I made 
+  both from scratch.
+</p>
+<p>
+  The FSR was built by sandwiching Velostat, a pressure-sensitive 
+  conductive plastic, between two layers of copper tape, creating 
+  a sensor that changes resistance under pressure. The McKibben 
+  actuator was constructed from a latex tube inside a braided mesh 
+  sleeve, which expands radially and contracts axially when inflated 
+  — the same principle used in soft robotics research at the Harvard 
+  John A. Paulson School of Engineering and Applied Sciences website.
+</p>
+<p>
+  Building both from materials in the lab taught me more about 
+  how these components actually work than buying them ever would 
+  have. This is version 1 — inflate to target pressure, hold and 
+  alert when too tight and manually deflate. Automatic deflation via solenoid 
+  valve is the next development milestone.
+</p>
+
+    <!-- DEMO -->
+    <h2>Demo</h2>
+
+    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
+      <source src="../placeholder_assets/embrace_test_demo.mp4" type="video/mp4">
+    </video>
+    <p class="caption">Closed-loop pressure sensing — pump inflates McKibben actuator to target fit</p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/embrace_test_circuit.jpeg" 
+           alt="Full circuit — FSR, Arduino, pump">
+      <img src="../placeholder_assets/embrace_test_serial.jpeg" 
+           alt="Serial Monitor output showing pressure readings">
+    </div>
+    <p class="caption">Left: full circuit · Right: Serial Monitor showing live pressure classification</p>
+
+    <!-- SYSTEM -->
+    <h2>How It Works</h2>
+
+    <div class="circuit-grid">
+      <div class="circuit-block">
+        <h3>Input — Handmade FSR</h3>
+        <p>
+          A pressure sensor made from Velostat — a conductive 
+          plastic whose resistance drops under pressure — sandwiched 
+          between two layers of copper tape. No commercial sensor 
+          needed. The harder you press, the more current flows, 
+          and Arduino reads the change on analog pin A0.
+        </p>
+      </div>
+      <div class="circuit-block">
+        <h3>Output — McKibben Actuator</h3>
+        <p>
+          A McKibben pneumatic artificial muscle — a latex tube 
+          and a balloon inside a braided mesh sleeve — that expands radially 
+          and contracts axially when inflated. Used here to 
+          simulate the self-sizing bladder system planned for 
+          the final Embrace brace.
+        </p>
+      </div>
+      <div class="circuit-block">
+        <h3>Controller — Arduino Uno R3</h3>
+        <p>
+          Reads FSR pressure via A0, maps it to a 0–1000 scale, 
+          and makes decisions: inflate if too loose, hold if 
+          correct fit, alert if too tight. Uses 
+          <code>millis()</code> for a non-blocking Serial output 
+          so feedback is fast and responsive.
+        </p>
+      </div>
+      <div class="circuit-block">
+        <h3>Deflation <span class="next-badge">Next iteration</span></h3>
+        <p>
+          Version 1 uses manual pinch release to deflate. 
+          Version 2 will integrate a solenoid valve controlled 
+          by Arduino Pin 11 — when pressure exceeds the safe 
+          threshold, the valve opens automatically and vents air.
+        </p>
+      </div>
+    </div>
+
+    <!-- WIRING -->
+    <h2>Wiring</h2>
+    <div class="img-duo">
+    <img src="../placeholder_assets/embrace_test_wiring.jpeg" 
+         alt="Wiring diagram">
+    <img src="../placeholder_assets/embrace_test_circuit.jpeg" 
+         alt="Serial Monitor output showing pressure readings">
+    </div>
+    <p class="caption">Circuit layout — FSR voltage divider + pump control</p>
+
+    <table class="wiring-table">
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Purpose</th>
+      </tr>
+      <tr>
+        <td>Arduino 5V</td>
+        <td>FSR copper layer 1</td>
+        <td>Power to sensor</td>
+      </tr>
+      <tr>
+        <td>FSR copper layer 2</td>
+        <td>Arduino A0</td>
+        <td>Reads pressure</td>
+      </tr>
+      <tr>
+        <td>Arduino Pin 9</td>
+        <td>Pump wire 1</td>
+        <td>Pump control signal</td>
+      </tr>
+      <tr>
+        <td>Arduino GND</td>
+        <td>Pump wire 2</td>
+        <td>Shared ground</td>
+      </tr>
+    </table>
+
+    <!-- CODE -->
+    <h2>Code</h2>
+    <p>
+      Written in C++ for Arduino. Uses the class-free structure 
+      with <code>millis()</code> for non-blocking timing — 
+      no <code>delay()</code> calls anywhere, keeping the 
+      sensor responsive at all times.
+    </p>
+
+    <div class="code-block">// EMBRACE v1 — Pressure Sensing + Pneumatic Inflation
+// Velostat FSR on A0 | Mini air pump on Pin 9
+// Deflation: manual pinch release (solenoid v2)
+
+const int FSR_PIN  = A0;
+const int PUMP_PIN = 9;
+
+const int TOO_LOOSE = 150;
+const int GOOD_FIT  = 450;
+const int TOO_TIGHT = 700;
+
+unsigned long lastPrint = 0;
+const int PRINT_MS = 100;
+
+void setup() {
+  pinMode(PUMP_PIN, OUTPUT);
+  digitalWrite(PUMP_PIN, LOW);
+  Serial.begin(9600);
+  Serial.println("=== Embrace v1 Ready ===");
+}
+
+void loop() {
+  int raw      = analogRead(FSR_PIN);
+  int pressure = map(raw, 0, 1023, 0, 1000);
+
+  if (pressure &lt; GOOD_FIT) {
+    digitalWrite(PUMP_PIN, HIGH);
+    printState(pressure, "INFLATING");
+
+  } else if (pressure &gt;= GOOD_FIT &amp;&amp; pressure &lt;= TOO_TIGHT) {
+    digitalWrite(PUMP_PIN, LOW);
+    printState(pressure, "GOOD FIT — holding");
+
+  } else {
+    digitalWrite(PUMP_PIN, LOW);
+    printState(pressure, "TOO TIGHT — pinch tube to release");
+  }
+}
+
+void printState(int pressure, String state) {
+  if (millis() - lastPrint > PRINT_MS) {
+    Serial.print("Pressure: ");
+    Serial.print(pressure);
+    Serial.print("  |  ");
+    Serial.println(state);
+    lastPrint = millis();
+  }
+}</div>
+
+    <!-- PROCESS -->
+    <h2>Process</h2>
     
-      <p>
-        Add a <a href="./rawcode.html" target="_blank">link to your raw code</a>.
-      </p>
-    </section>
-  </body>
+    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
+      <source src="../placeholder_assets/embrace_test_fsr_build.mp4" type="video/mp4">
+    </video>
+    <p class="caption">Building the handmade FSR — Velostat sandwiched between copper tape layers</p>
 
-  <footer>See config.js</footer>
+    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
+      <source src="../placeholder_assets/embrace_test_mckibben.mp4" type="video/mp4">
+    </video>
+    <p class="caption">Handmade McKibben pneumatic actuator — latex tube inside braided mesh sleeve</p>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
+      <source src="../placeholder_assets/embrace_test_demo.mp4" type="video/mp4">
+    </video>
+     <p class="caption">Testing closed-loop inflation — pressing FSR triggers pump via Arduino</p>
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
