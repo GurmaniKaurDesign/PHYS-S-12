@@ -169,12 +169,13 @@
     <span class="technique-badge">Mid-print fabric embedding</span>
 
     <!-- Final result -->
-    <img src="../placeholder_assets/tie_final.jpg"
-         alt="Final 3D printed red tie with embedded mesh fabric">
+    <video controls muted loop playsinline>
+      <source src="../placeholder_assets/Tie_final_action.mp4" type="video/mp4">
+    </video>
     <p class="caption">Final printed tie — PLA with embedded net fabric mesh, worn for the final presentation</p>
 
     <video controls muted loop playsinline>
-      <source src="../placeholder_assets/Tie_final.mov" type="video/mp4">
+      <source src="../placeholder_assets/Tie_final.mp4" type="video/mp4">
     </video>
     <p class="caption">Mid-print pause — placing net fabric mesh on the print bed before continuing</p>
 
@@ -252,7 +253,7 @@
           encapsulating the mesh between layers.
         </p>
         <video controls muted loop playsinline>
-          <source src="../placeholder_assets/Tie_embedding.mov" type="video/mp4">
+          <source src="../placeholder_assets/Tie_embedding.mp4" type="video/mp4">
         </video>
         <p class="caption">Placing and securing the mesh fabric mid-print</p>
       </div>
@@ -268,7 +269,7 @@
           a composite material that is rigid in structure 
           but has a soft textile quality at the surface in contact with skin.
         </p>
-        <img src="../placeholder_assets/tie_final.jpg"
+        <img src="../placeholder_assets/tie_final.jpeg"
              alt="Completed tie fresh off the print bed">
         <p class="caption">Completed tie — fresh off the Prusa MK4S</p>
       </div>
@@ -317,36 +318,47 @@
     <span class="technique-badge">Photogrammetry/3D scanning</span>
 
     <p>
-      Scanned a pair of AirPods — a consumer object with 
-      complex compound curves, tight tolerances, and 
-      high-gloss surfaces that challenge scanning accuracy. 
+      Scanned an In-unit Air Conditioner — a consumer object with 
+      complex details, tight tolerances, and 
+      rough textures, all avaible to be downloaded below. 
       The goal was to capture a real product accurately 
       enough to inform future CAD work or reverse engineering.
     </p>
 
-    <!-- Drop scan results here tomorrow -->
-    <img src="../placeholder_assets/scan_final.jpg"
-         alt="3D scan of AirPods">
-    <p class="caption">3D scan — AirPods, captured via [scanner/software used]</p>
-
-    <div class="img-duo">
-      <img src="../placeholder_assets/scan_process.jpg"
-           alt="Scanning process">
-      <img src="../placeholder_assets/scan_mesh.jpg"
-           alt="Raw mesh output">
-    </div>
-    <p class="caption">Left: scanning setup · Right: raw mesh output before cleanup</p>
+    <!-- Scan results -->
+    <img src="../placeholder_assets/scan_final.jpeg"
+         alt="3D scan of Air Conditioner">
+    <p class="caption">Textureless 3D scan Preview — In-unit Air Conditioner, captured via RealityScan</p>
 
     <h3>Reflection</h3>
     <p>
-      High-gloss plastic surfaces scatter light unpredictably, 
-      making accurate point cloud capture difficult. 
-      [Add my specific observations here after scanning tomorrow.]
+      The scan captured the overall shape and details of the air conditioner, 
+      but some areas were noisy or incomplete due to reflective surfaces 
+      and occlusions. Post-processing in RealityScan helped clean up the mesh, 
+      but further refinement would be needed for precise CAD modeling.
     </p>
 
     <div class="download-row">
-      <a class="download-btn" href="../placeholder_assets/airpods_scan.stl" download>
-        ↓ Download Scan STL
+      <a class="download-btn" href="../placeholder_assets/air_conditioner_scan.obj" download>
+        ↓ Download Scan OBJ
+      </a>
+    </div>
+
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/air_conditioner_scan.mtl" download>
+        ↓ Download Scan MTL
+      </a>
+    </div>
+
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/air_conditioner_scan.jpeg" download>
+        ↓ Download Scan Texture 1
+      </a>
+    </div>
+
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/air_conditioner_scan_2.jpeg" download>
+        ↓ Download Scan Texture 2
       </a>
     </div>
 
