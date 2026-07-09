@@ -1,33 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 5 · 3D Printing</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p {
+      margin-bottom: 0;
+      font-style: italic;
+    }
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .step-content p {
+      margin-bottom: 0.75rem;
+      max-width: none;
+    }
+    .step-content img,
+    .step-content video {
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 1rem;
+    }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .specs-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .specs-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+    }
+    .specs-table tr:last-child td { border-bottom: none; }
+    .technique-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      align-items: start;
+    }
+    .two-col-block {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+    }
+    .two-col-block h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .two-col-block p {
+      font-size: 0.9rem;
+      margin-bottom: 0;
+      max-width: none;
+    }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 5: 3D Printing</h1>
-     
+<body>
+  <section class="blog">
+
+    <p class="blog-meta">Week 05 · 3D Printing · July 2026</p>
+    <h1>Printed in Crimson Red</h1>
+
+    <div class="concept-highlight">
       <p>
-        Design and print something that cannot be made easily through subtractive methods. Include a Fusion file (eg. <code>.f3z</code>), STL of your object, and sliced gcode in your documentation. 
+        A 3D printed tie for my final project presentation, printed in 
+        Harvard's Crimson Red to match my red suit. Mid-print fabric embedding 
+        turns a simple extrusion into a composite material: 
+        rigid PLA structure with soft mesh woven into its layers, 
+        held to the print bed with magnets during the pause.
       </p>
-      
-      <p>This is how you create <a href="./Assets/example_part.stl" download>a link to download a file</a>.</p>
-    </section>
-  </body>
+    </div>
 
-  <footer>See config.js</footer>
+    <p>
+      This week explored two techniques: mid-print material 
+      embedding and 3D scanning. The tie started as a 
+      SolidWorks model, was sliced for the Prusa MK4S, 
+      then paused after the first two layers to insert a net fabric mesh 
+      before continuing. The result is a wearable object 
+      that is part print, part textile - so I can wear my project 
+      to my final presentation and do that in style!
+    </p>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <!-- PROJECT 1: TIE -->
+    <h2>Project 1 - The Red Tie</h2>
+    <span class="technique-badge">Mid-print fabric embedding</span>
+
+    <!-- Final result -->
+    <img src="../placeholder_assets/tie_final.jpg"
+         alt="Final 3D printed red tie with embedded mesh fabric">
+    <p class="caption">Final printed tie — PLA with embedded net fabric mesh, worn for the final presentation</p>
+
+    <video controls muted loop playsinline>
+      <source src="../placeholder_assets/Tie_final.mov" type="video/mp4">
+    </video>
+    <p class="caption">Mid-print pause — placing net fabric mesh on the print bed before continuing</p>
+
+    <!-- Print specs -->
+    <h3>Print Specifications</h3>
+    <table class="specs-table">
+      <tr>
+        <th>Parameter</th>
+        <th>Value</th>
+      </tr>
+      <tr>
+        <td>Printer</td>
+        <td>Prusa MK4S</td>
+      </tr>
+      <tr>
+        <td>Material</td>
+        <td>PLA — Crimson Red</td>
+      </tr>
+      <tr>
+        <td>Embedded material</td>
+        <td>Net fabric mesh</td>
+      </tr>
+      <tr>
+        <td>Pause layer</td>
+        <td>Layer 2</td>
+      </tr>
+      <tr>
+        <td>Bed adhesion</td>
+        <td>Magnets to secure fabric during pause</td>
+      </tr>
+      <tr>
+        <td>Slicer</td>
+        <td>PrusaSlicer</td>
+      </tr>
+    </table>
+
+    <!-- Process -->
+    <h3>Process</h3>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Modelling in SolidWorks</h3>
+        <p>
+          Designed the tie form in SolidWorks — a classic 
+          necktie silhouette with a 0.1" offset and 0.5" extrusion to embed 
+          fabric and still hold its shape after printing.
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Slicing for Mid-Print Pause</h3>
+        <p>
+          Imported the STL into PrusaSlicer and added a 
+          filament change/pause command at layer 2. 
+          This gives just enough base to hold the fabric 
+          flat before the upper layers lock it in.
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Embedding the Fabric</h3>
+        <p>
+          At the pause, the printer moved to the side and 
+          waited. The net fabric mesh was
+          laid flat on the print surface, and secured with 
+          magnets on the print bed to prevent it from shifting 
+          when printing resumed. The printer then continued, 
+          encapsulating the mesh between layers.
+        </p>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/Tie_embedding.mov" type="video/mp4">
+        </video>
+        <p class="caption">Placing and securing the mesh fabric mid-print</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>Final Print</h3>
+        <p>
+          The printer resumed and completed the tie with 
+          the fabric fully embedded between the PLA layers creating
+          a composite material that is rigid in structure 
+          but has a soft textile quality at the surface in contact with skin.
+        </p>
+        <img src="../placeholder_assets/tie_final.jpg"
+             alt="Completed tie fresh off the print bed">
+        <p class="caption">Completed tie — fresh off the Prusa MK4S</p>
+      </div>
+    </div>
+
+    <!-- Two column: technique insight -->
+    <div class="two-col">
+      <div class="two-col-block">
+        <h3>What worked</h3>
+        <p>
+          The magnets were key — without them the mesh 
+          shifted when the printhead moved, causing 
+          misalignment. Securing the fabric flat before 
+          resuming gave clean encapsulation.
+        </p>
+      </div>
+      <div class="two-col-block">
+        <h3>What I'd change</h3>
+        <p>
+          Pausing at layer 2 meant very little PLA below 
+          the fabric. Next time I'd pause at layer 4–5 
+          for a stronger base before embedding, especially 
+          for larger fabric pieces. I also want to experiment with 
+          light and creating slots in my print for conceling the light
+          source to create a glowing effect through the mesh.
+        </p>
+      </div>
+    </div>
+
+    <!-- Downloads -->
+    <h3>Files</h3>
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Red_Tie.STL" download>
+        ↓ Download STL
+      </a>
+      <a class="download-btn" href="../placeholder_assets/tie.SLDPRT" download>
+        ↓ Download SolidWorks Part
+      </a>
+      <a class="download-btn" href="../placeholder_assets/Gurmani_Kaur_Red_Tie.bgcode" download>
+        ↓ Download Prusa Gcode
+      </a>
+    </div>
+
+    <!-- PROJECT 2: 3D SCAN -->
+    <h2>Project 2 — 3D Scan</h2>
+    <span class="technique-badge">Photogrammetry/3D scanning</span>
+
+    <p>
+      Scanned a pair of AirPods — a consumer object with 
+      complex compound curves, tight tolerances, and 
+      high-gloss surfaces that challenge scanning accuracy. 
+      The goal was to capture a real product accurately 
+      enough to inform future CAD work or reverse engineering.
+    </p>
+
+    <!-- Drop scan results here tomorrow -->
+    <img src="../placeholder_assets/scan_final.jpg"
+         alt="3D scan of AirPods">
+    <p class="caption">3D scan — AirPods, captured via [scanner/software used]</p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/scan_process.jpg"
+           alt="Scanning process">
+      <img src="../placeholder_assets/scan_mesh.jpg"
+           alt="Raw mesh output">
+    </div>
+    <p class="caption">Left: scanning setup · Right: raw mesh output before cleanup</p>
+
+    <h3>Reflection</h3>
+    <p>
+      High-gloss plastic surfaces scatter light unpredictably, 
+      making accurate point cloud capture difficult. 
+      [Add my specific observations here after scanning tomorrow.]
+    </p>
+
+    <div class="download-row">
+      <a class="download-btn" href="../placeholder_assets/airpods_scan.stl" download>
+        ↓ Download Scan STL
+      </a>
+    </div>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
