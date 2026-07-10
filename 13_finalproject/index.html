@@ -1,32 +1,464 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Project · Embrace</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p { margin-bottom: 0; font-style: italic; }
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+    .values-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .value-pill {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+    }
 
-  <body>
-    <section class="blog">
-      <h1>Final Project</h1>
-      
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+      align-items: start;
+    }
+    .two-col-block {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+    }
+    .two-col-block h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .two-col-block p { font-size: 0.9rem; margin-bottom: 0; max-width: none; }
+
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--secondary-color);
+      margin: 1.5rem 0;
+    }
+    .system-block {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--secondary-color);
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .system-block .sys-tag {
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+    .system-block h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1rem; }
+    .system-block p { font-size: 0.85rem; margin-bottom: 0; max-width: none; }
+
+    /* BOM table */
+    .bom-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .bom-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.6rem 0.75rem;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+    .bom-table td {
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      vertical-align: top;
+    }
+    .bom-table tr:last-child td { border-bottom: none; }
+    .bom-table tr:hover td { background-color: var(--secondary-color); }
+    .bom-cat {
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+    .bom-cat.electronics { background: #dce8f0; color: #1a4a6b; }
+    .bom-cat.pneumatics  { background: #d8e8d0; color: #2f5a2f; }
+    .bom-cat.structure   { background: #f0e6c8; color: #8a6a1f; }
+    .bom-cat.sensing     { background: #f0d8e8; color: #6b1a4a; }
+    .tbd { color: var(--accent-color); font-family: var(--mono-font-family); font-size: 0.78rem; }
+
+    .milestone-list {
+      list-style: none;
+      padding: 0;
+      margin: 1rem 0;
+    }
+    .milestone-list li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 1rem;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--secondary-color);
+      font-size: 0.9rem;
+      align-items: start;
+    }
+    .milestone-list li:last-child { border-bottom: none; }
+    .ms-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 4px;
+    }
+    .ms-dot.done   { background: var(--accent-color); }
+    .ms-dot.active { background: #BA7517; }
+    .ms-dot.next   { background: var(--secondary-color); border: 1px solid var(--accent-color); }
+
+    .proof-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 1px;
+    }
+
+    @media (max-width: 768px) {
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
+
+<body>
+  <section class="blog">
+
+    <p class="blog-meta">Final Project · PS70 · Harvard Summer School 2026</p>
+    <h1>Embrace</h1>
+
+    <div class="concept-highlight">
       <p>
-        This is where you'll document your final project. Be sure to include a video demonstrating your project and a bill of materials. Good documentation should explain your entire build process such that someone reading your documentation could recreate your entire project from scratch. See the PS70 website for examples.
+        A self-sizing, breathable, smart neck brace that prioritises 
+        patient comfort and disaster relief without compromising 
+        immobilisation. A device that feels like an extension of 
+        the self — not an intrusion.
       </p>
-      
-    </section>
-  </body>
+    </div>
 
-  <footer>See config.js</footer>
+    <div class="values-row">
+      <span class="value-pill">Comfort</span>
+      <span class="value-pill">Compliance</span>
+      <span class="value-pill">Care</span>
+      <span class="value-pill">Soft Robotics</span>
+      <span class="value-pill">Biomedical Design</span>
+    </div>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <!-- THE PROBLEM -->
+    <h2>The Problem</h2>
+    <p>
+      Standard emergency and post-surgical neck braces are built 
+      like ancient torture devices. They trap heat and sweat, 
+      compress the jaw, and cause severe pressure ulcers on 
+      the chin and collarbones. Paramedics have to guess sizing 
+      under high-stress conditions. Patients endure weeks of 
+      discomfort in a device not designed for their body.
+    </p>
+    <p>
+      Comfort is not a luxury feature in medical equipment. 
+      It's compliance. Patients who aren't in pain wear 
+      their braces correctly.
+    </p>
+
+    <img src="../placeholder_assets/embrace_problem.jpg"
+         alt="Traditional neck brace — pressure points and discomfort">
+    <p class="caption">Traditional cervical collar — pressure mapping shows ulcer-prone contact zones</p>
+
+    <!-- THE CONCEPT -->
+    <h2>The Concept</h2>
+    <p>
+      Embrace takes an exoskeleton-like approach — a 3D-printed 
+      breathable lattice shell housing soft pneumatic McKibben 
+      actuators that automatically conform to the patient's neck 
+      when inflated. A handmade Velostat pressure sensor reads 
+      fit in real time, and an Arduino Uno R3 controls the 
+      inflation pump until the correct pressure is reached.
+    </p>
+
+    <div class="two-col">
+      <div class="two-col-block">
+        <h3>Self-Sizing</h3>
+        <p>
+          McKibben pneumatic actuators — soft robotic bladders 
+          inside a braided mesh — expand radially when inflated, 
+          distributing pressure evenly across the neck surface. 
+          No manual sizing. No guessing under pressure.
+        </p>
+      </div>
+      <div class="two-col-block">
+        <h3>Breathable Shell</h3>
+        <p>
+          A 3D-printed PLA lattice structure allows airflow 
+          through the brace, eliminating heat and sweat 
+          buildup — the primary cause of skin breakdown 
+          in long-term brace wear.
+        </p>
+      </div>
+      <div class="two-col-block">
+        <h3>Smart Feedback</h3>
+        <p>
+          Pressure sensing via FSR detects under-tightening 
+          and over-tightening. A haptic or LED output tells 
+          the patient and caregiver the brace is correctly 
+          positioned — without needing to remove it to check.
+        </p>
+      </div>
+      <div class="two-col-block">
+        <h3>Objective</h3>
+        <p>
+          Study current brace pressure points and FDA 
+          regulations, then design a replacement that 
+          integrates wearable technology and soft robotics 
+          to create a device that is not only functional 
+          but humane.
+        </p>
+      </div>
+    </div>
+
+    <img src="../placeholder_assets/embrace_concept.jpg"
+         alt="Embrace concept sketches and renders">
+    <p class="caption">Embrace — concept sketches and system diagram</p>
+
+    <!-- SYSTEM -->
+    <h2>System Architecture</h2>
+
+    <div class="system-grid">
+      <div class="system-block">
+        <p class="sys-tag">Input</p>
+        <h3>Pressure Sensor</h3>
+        <p>FSR reads contact force between brace and neck surface continuously</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Controller</p>
+        <h3>Arduino Uno R3</h3>
+        <p>Maps pressure to fit zones — too loose, good fit, too tight</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Output A</p>
+        <h3>Air Pump</h3>
+        <p>Inflates McKibben actuators until target pressure is reached</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Output B</p>
+        <h3>Solenoid Valve</h3>
+        <p>Opens to vent air automatically when pressure exceeds safe threshold</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Output C</p>
+        <h3>Haptic / LED</h3>
+        <p>Confirms correct fit to patient and caregiver without removing brace</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Structure</p>
+        <h3>Lattice Shell</h3>
+        <p>3D printed PLA exoskeleton — breathable, biocompatible contact surfaces</p>
+      </div>
+    </div>
+
+    <!-- PROOF OF CONCEPT -->
+    <h2>Proof of Concept</h2>
+    <p>
+      Week 4's programming assignment became the first live test 
+      of Embrace's core sensing loop. With no commercial FSR or 
+      McKibben actuator available in the lab, both were built 
+      from scratch — Velostat + copper tape for the sensor, 
+      latex tube + braided mesh for the actuator.
+    </p>
+
+    <a class="proof-link" href="../04_microcontroller/index.html">
+      → View full Week 4 documentation
+    </a>
+
+    <div class="img-duo" style="margin-top:1.5rem;">
+      <img src="../placeholder_assets/embrace_circuit.jpg"
+           alt="Embrace proof of concept circuit">
+      <img src="../placeholder_assets/embrace_serial.jpg"
+           alt="Serial Monitor — live pressure readings">
+    </div>
+    <p class="caption">Left: proof of concept circuit · Right: Serial Monitor showing live pressure classification</p>
+
+    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
+      <source src="../placeholder_assets/embrace_demo.mp4" type="video/mp4">
+    </video>
+    <p class="caption">Closed-loop test — FSR detects pressure, Arduino controls pump inflation</p>
+
+    <!-- BILL OF MATERIALS -->
+    <h2>Bill of Materials</h2>
+    <p>
+      Component list for Embrace v1. Quantities marked TBD 
+      are dependent on final form factor and sizing decisions.
+    </p>
+
+    <table class="bom-table">
+      <tr>
+        <th>#</th>
+        <th>Component</th>
+        <th>Purpose</th>
+        <th>Category</th>
+        <th>Qty</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>Arduino Uno R3</td>
+        <td>Microcontroller — reads sensor, controls pump and valve</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Commercial FSR (e.g. Interlink FSR 402)</td>
+        <td>Pressure sensing at brace-neck interface</td>
+        <td><span class="bom-cat sensing">Sensing</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Commercial McKibben actuator</td>
+        <td>Self-sizing pneumatic bladder</td>
+        <td><span class="bom-cat pneumatics">Pneumatics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Mini air pump</td>
+        <td>Inflates McKibben actuators to target pressure</td>
+        <td><span class="bom-cat pneumatics">Pneumatics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Solenoid valve (5V, normally closed)</td>
+        <td>Automatic deflation when pressure exceeds safe threshold</td>
+        <td><span class="bom-cat pneumatics">Pneumatics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>6</td>
+        <td>10kΩ resistor</td>
+        <td>FSR voltage divider</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>7</td>
+        <td>Vibration motor / haptic buzzer</td>
+        <td>Fit confirmation feedback to patient</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>8</td>
+        <td>PLA filament</td>
+        <td>3D printed breathable lattice shell</td>
+        <td><span class="bom-cat structure">Structure</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>9</td>
+        <td>Flexible TPU filament</td>
+        <td>Soft biocompatible contact surfaces</td>
+        <td><span class="bom-cat structure">Structure</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>10</td>
+        <td>Pneumatic tubing + connectors</td>
+        <td>Air routing between pump, valve, and actuators</td>
+        <td><span class="bom-cat pneumatics">Pneumatics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+      <tr>
+        <td>11</td>
+        <td>Jumper wires + breadboard</td>
+        <td>Circuit prototyping and connections</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td class="tbd">TBD</td>
+      </tr>
+    </table>
+
+    <!-- MILESTONES -->
+    <h2>Build Milestones</h2>
+
+    <ul class="milestone-list">
+      <li>
+        <span class="ms-dot done"></span>
+        <span><strong>Pressure sensing loop</strong> — Velostat FSR + Arduino reading and classifying pressure in real time ✓</span>
+      </li>
+      <li>
+        <span class="ms-dot done"></span>
+        <span><strong>Pneumatic inflation</strong> — Arduino controlling mini air pump via closed-loop FSR feedback ✓</span>
+      </li>
+      <li>
+        <span class="ms-dot done"></span>
+        <span><strong>McKibben actuator (prototype)</strong> — handmade from latex tube + braided mesh, inflation tested ✓</span>
+      </li>
+      <li>
+        <span class="ms-dot active"></span>
+        <span><strong>Automatic deflation</strong> — solenoid valve integration, currently in progress</span>
+      </li>
+      <li>
+        <span class="ms-dot next"></span>
+        <span><strong>Lattice shell design</strong> — 3D printed breathable exoskeleton in PLA</span>
+      </li>
+      <li>
+        <span class="ms-dot next"></span>
+        <span><strong>TPU contact surfaces</strong> — soft biocompatible inner lining</span>
+      </li>
+      <li>
+        <span class="ms-dot next"></span>
+        <span><strong>System integration</strong> — all components assembled into wearable form</span>
+      </li>
+      <li>
+        <span class="ms-dot next"></span>
+        <span><strong>User testing</strong> — fit, comfort, and feedback evaluation</span>
+      </li>
+      <li>
+        <span class="ms-dot next"></span>
+        <span><strong>Final presentation</strong> — worn with a red printed tie, naturally</span>
+      </li>
+    </ul>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
