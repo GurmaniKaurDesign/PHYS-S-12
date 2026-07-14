@@ -1,36 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 6 · Input Devices</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .code-block {
+      background: var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre;
+    }
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p { margin-bottom: 0; font-style: italic; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img,
+    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
+    .wiring-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .wiring-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .wiring-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+    }
+    .wiring-table tr:last-child td { border-bottom: none; }
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin: 1rem 0;
+    }
+    .data-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 2px solid var(--secondary-color);
+    }
+    .data-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      font-family: var(--mono-font-family);
+    }
+    .data-table tr:last-child td { border-bottom: none; }
+    .sensor-tag {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+    .embrace-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 1px;
+      margin-top: 0.5rem;
+    }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 6: Inputs</h1>
+<body>
+  <section class="blog">
 
+    <p class="blog-meta">Week 06 · Electronic Input Devices · July 2026</p>
+    <h1>Sensing Fields</h1>
+
+    <div class="concept-highlight">
       <p>
-        You have two assignments: create and calibrate a capacitive sensor and then use and calibrate another sensor.
+        Two input sensors this week: a Hall effect sensor calibrated 
+        against distance from a magnet, and a self-fabricated 
+        capacitive sensor. Both feed directly into thinking about 
+        how Embrace will sense fit without a commercial pressure sensor.
       </p>
-      
-      <h2>Capacitive Sensor</h2>
-      
-      <h2>Another Sensor</h2>
-      
-    </section>
-  </body>
+    </div>
 
-  <footer>See config.js</footer>
+    <!-- SENSOR 1: HALL -->
+    <h2>Sensor 1: Hall Effect</h2>
+    <span class="sensor-tag">Analog sensor · Magnetic field detection</span>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <p>
+      A Hall effect sensor detects magnetic fields by measuring 
+      the voltage shift across a conductor when placed in a 
+      magnetic field — the Hall voltage. Moving a magnet closer 
+      shifts that voltage proportionally to field strength.
+    </p>
+
+    <!-- Wiring -->
+    <h3>Wiring</h3>
+    <img src="../placeholder_assets/hall_wiring.jpeg"
+         alt="Hall sensor wiring on breadboard">
+    <p class="caption">Hall sensor (SS49E) wired to Arduino Uno R3 — 3 connections total</p>
+
+    <table class="wiring-table">
+      <tr><th>Sensor Pin</th><th>Arduino</th><th>Purpose</th></tr>
+      <tr><td>Pin 1 — VCC</td><td>5V</td><td>Power</td></tr>
+      <tr><td>Pin 2 — GND</td><td>GND</td><td>Ground</td></tr>
+      <tr><td>Pin 3 — OUT</td><td>A0</td><td>Analog signal</td></tr>
+    </table>
+
+    <!-- Basic reading -->
+    <h3>Basic Reading</h3>
+    <p>
+      First, I confirmed the sensor was responding correctly by reading the analog output on the Arduino Serial Monitor. The sensor produced a
+      resting value near 336 raw (1.5V), shifting up or down 
+      as a fridge magnet approached it.
+    </p>
+
+    <video src="../placeholder_assets/hall_serial_basic.mp4"
+           alt="Experiment- basic Hall sensor readings"
+           controls>
+    </video>
+    <p class="caption">Serial Monitor resting at 336, shifted with magnet proximity</p>
+
+    <div class="code-block">// Hall Sensor — Basic Reading
+const int HALL_PIN = A0;
+
+void setup() {
+  Serial.begin(9600);
+}
+
+void loop() {
+  int raw = analogRead(HALL_PIN);
+  float voltage = raw * (5.0 / 1023.0);
+  Serial.print("Raw: ");
+  Serial.print(raw);
+  Serial.print("  |  Voltage: ");
+  Serial.print(voltage, 3);
+  Serial.println(" V");
+  delay(200);
+}</div>
+
+    <!-- Calibration data -->
+    <h3>Calibration — Distance vs Reading</h3>
+    <p>
+      Collected readings at fixed distances from 10cm down 
+      to 0.5cm, moving the magnet 2cm or 1cm closer each time and 
+      averaging five readings at each position to reduce noise.
+    </p>
+
+    <table class="data-table">
+      <tr>
+        <th>Distance (cm)</th>
+        <th>Raw Reading</th>
+      </tr>
+      <tr><td>10.0</td><td>336</td></tr>
+      <tr><td>8.0</td><td>311</td></tr>
+      <tr><td>6.0</td><td>279</td></tr>
+      <tr><td>4.0</td><td>255</td></tr>
+      <tr><td>3.0</td><td>218</td></tr>
+      <tr><td>2.0</td><td>178</td></tr>
+      <tr><td>1.0</td><td>113</td></tr>
+      <tr><td>0.5</td><td>1</td></tr>
+    </table>
+
+    <img src="../placeholder_assets/hall_graph.jpeg"
+         alt="Hall sensor calibration graph — reading vs distance">
+    <p class="caption">Raw reading vs distance in mm — inverse square relationship visible</p>
+
+    <!-- Calibrated code -->
+    <h3>Calibrated Code</h3>
+
+    <div class="code-block">// Hall Sensor: Calibrated Proximity Detection
+const int HALL_PIN = A0;
+const float BASELINE = 336.0;
+unsigned long lastPrint = 0;
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("=== Hall Sensor Calibrated ==");
+}
+
+void loop() {
+  int raw = analogRead(HALL_PIN);
+  float voltage = raw * (5.0 / 1023.0);
+  float fieldStrength = abs(raw - BASELINE);
+
+  String proximity = "";
+  if (fieldStrength < 20)       proximity = "No magnet / far away";
+  else if (fieldStrength < 80)  proximity = "Magnet nearby";
+  else if (fieldStrength < 200) proximity = "Magnet close";
+  else                           proximity = "Magnet very close";
+
+  if (millis() - lastPrint &gt; 150) {
+    Serial.print("Raw: ");
+    Serial.print(raw);
+    Serial.print("  |  Field: ");
+    Serial.print(fieldStrength);
+    Serial.print("  |  ");
+    Serial.println(proximity);
+    lastPrint = millis();
+  }
+}</div>
+
+<!-- Embrace connection -->
+    <h3>Connection to Embrace</h3>
+    <p>
+      A Hall sensor embedded in the brace shell could detect 
+      a small magnet mounted on the McKibben actuator bladder — 
+      measuring how far the bladder has expanded indirectly, 
+      without needing a pressure sensor inside the airway. 
+      As the bladder inflates and the magnet moves closer 
+      to the shell, the Hall sensor reading increases — 
+      giving a non-invasive measure of inflation state.
+    </p>
+    <a class="embrace-link" href="../13_finalproject/index.html">
+      → See how this fits into Embrace
+    </a>
+
+    <!-- SENSOR 2: CAPACITIVE  -->
+    <h2>Sensor 2: Capacitive (Self-Fabricated)</h2>
+    <span class="sensor-tag">Self-fabricated sensor · Proximity / touch detection</span>
+    
+    <p>
+      Chloe, Claudia, Matthew and I were tasked with creating 
+      a capacitive sensor to detect water level in a bottle and we
+      had 15 mins to create a proof of concept for the same. We 
+      taped two copper sheets on either side of Claudia's fancy 
+      water bottle to create a sleek and minimalistic design that 
+      could get us some style points. Then we built the circuit, 
+      attached alligator clips to the copper tapes and edited the code 
+      provided on the website to suit our experiment.
+    </p>
+
+        <img src="../placeholder_assets/cap_setup.jpeg"
+         alt="Experiment- Capacitive Sensor Setup">
+    <p class="caption">Self- fabrication Water level sensing Capacitive sensor Setup</p>
+
+
+       <!-- Wiring -->
+    <h3>Wiring</h3>
+    <img src="../placeholder_assets/cap_wiring.jpeg"
+         alt="Capacitive sensor wiring on breadboard">
+    <p class="caption">Capacitive sensor wired to Arduino Uno R3 — 2 connections total</p>
+
+    <table class="wiring-table">
+      <tr><th>Sensor Pin</th><th>Arduino</th><th>Purpose</th></tr>
+      <tr><td>Pin 1 — VCC</td><td>5V</td><td>Power</td></tr>
+      <tr><td>Pin 2 — GND</td><td>GND</td><td>Ground</td></tr>
+    </table>
+
+    <!-- Basic reading -->
+    <h3>Creating a Controlled Environment</h3>
+    <p>
+      Our first few readings were heavily influenced by moving variables, 
+      so to create a controlled environment for our team, we shaped a 
+      beaker out of a Chloe's Clover cafe coffee cup. We filled the bottle by percentages 0%, 25%, 50%, 75% and 100% and recorded our observations. I need to create a table and a graph to represent that.
+    </p>
+
+    <img src="../placeholder_assets/cap_controlled_env.jpeg"
+         alt="Experiment- Capacitive sensor controlled environment">
+    <p class="caption">Beaker shaped out of Clover Cafe Coffee Cup (alliteration!)</p>
+
+    <!-- Table of Readings -->
+    <h3>Water Level Detection</h3>
+    <p>
+      We filled the bottle by percentages 0%, 25%, 50%, 75% and 100% and 
+      recorded our observations. I have created a table and a graph to represent that. 
+      The slope is not perfectly uniform. It starts flat (rising by only 1 unit from 0% to 25%), 
+      then steepens between 25% and 75%, before slowing down slightly at the end.
+    </p>
+
+    <table class="data-table">
+      <tr>
+        <th>Water Level (%)</th>
+        <th>Raw Reading</th>
+      </tr>
+      <tr><td>0</td><td>250</td></tr>
+      <tr><td>25</td><td>251</td></tr>
+      <tr><td>50</td><td>256</td></tr>
+      <tr><td>75</td><td>260</td></tr>
+      <tr><td>100</td><td>263</td></tr>
+    </table>
+
+    <img src="../placeholder_assets/cap_graph.jpeg"
+         alt="Capacitive sensor graph — reading vs water level">
+    <p class="caption">Raw reading vs Water level in percentage — positive relationship visible</p>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
