@@ -25,24 +25,18 @@
       border-radius: 0 4px 4px 0;
     }
     .concept-highlight p { margin-bottom: 0; font-style: italic; }
-    .process-step {
-      display: grid;
-      grid-template-columns: 40px 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2.5rem;
-      align-items: start;
-    }
-    .step-number {
+    .sensor-tag {
+      display: inline-block;
       font-family: var(--mono-font-family);
-      font-size: 0.7rem;
-      color: var(--accent-color);
+      font-size: 0.65rem;
       letter-spacing: 0.1em;
-      padding-top: 0.2rem;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
     }
-    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
-    .step-content p { margin-bottom: 0.75rem; max-width: none; }
-    .step-content img,
-    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
     .wiring-table {
       width: 100%;
       border-collapse: collapse;
@@ -75,11 +69,11 @@
     .data-table th {
       text-align: left;
       font-family: var(--mono-font-family);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--accent-color);
-      padding: 0.5rem 0.75rem;
+      padding: 0.6rem 0.75rem;
       border-bottom: 2px solid var(--secondary-color);
     }
     .data-table td {
@@ -88,35 +82,55 @@
       font-family: var(--mono-font-family);
     }
     .data-table tr:last-child td { border-bottom: none; }
-    .sensor-tag {
-      display: inline-block;
-      font-family: var(--mono-font-family);
-      font-size: 0.65rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
-      background: var(--secondary-color);
-      color: var(--accent-color);
-      margin-bottom: 1rem;
-    }
-    .embrace-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.4rem;
+    .team-credit {
       font-family: var(--mono-font-family);
       font-size: 0.75rem;
-      letter-spacing: 0.08em;
       color: var(--accent-color);
-      text-decoration: none;
-      border-bottom: 1px solid var(--accent-color);
-      padding-bottom: 1px;
-      margin-top: 0.5rem;
+      letter-spacing: 0.06em;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img { width: 100%; border-radius: 4px; margin-top: 1rem; }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 280px;
+      margin: 1rem 0;
+    }
+    .chart-container-sm {
+      position: relative;
+      width: 100%;
+      height: 240px;
+      margin: 1rem 0;
+    }
+    .chart-label {
+      font-family: var(--mono-font-family);
+      font-size: 0.72rem;
+      color: var(--accent-color);
+      letter-spacing: 0.06em;
+      margin-bottom: 0.25rem;
     }
     @media (max-width: 768px) {
       .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
     }
   </style>
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 </head>
 
 <nav>
@@ -128,28 +142,215 @@
 <body>
   <section class="blog">
 
-    <p class="blog-meta">Week 06 · Electronic Input Devices · July 2026</p>
-    <h1>Sensing Fields</h1>
+    <p class="blog-meta">Week 06 · Input Devices · July 2026</p>
+    <h1>Sensing the<br>Invisible</h1>
 
     <div class="concept-highlight">
       <p>
-        Two input sensors this week: a Hall effect sensor calibrated 
-        against distance from a magnet, and a self-fabricated 
-        capacitive sensor. Both feed directly into thinking about 
-        how Embrace will sense fit without a commercial pressure sensor.
+        Two sensors this week: a self-fabricated capacitive sensor
+        that measures water level through a plastic bottle, and a
+        Hall effect sensor that detects magnetic field strength at
+        varying distances. Both calibrated, graphed, and connected
+        to an LED output.
       </p>
     </div>
 
-    <!-- SENSOR 1: HALL -->
-    <h2>Sensor 1: Hall Effect</h2>
-    <span class="sensor-tag">Analog sensor · Magnetic field detection</span>
+    <!-- SENSOR 1: CAPACITIVE -->
+    <h2>Sensor 1 — Capacitive Water Level</h2>
+    <span class="sensor-tag">Self-fabricated · Capacitive sensing · Team project</span>
+    <p class="team-credit">Team: Chloe · Claudia · Matthew · Gurmani</p>
 
     <p>
-      A Hall effect sensor detects magnetic fields by measuring 
-      the voltage shift across a conductor when placed in a 
-      magnetic field — the Hall voltage. Moving a magnet closer 
-      shifts that voltage proportionally to field strength.
+      A capacitive sensor measures water level by detecting changes
+      in the dielectric properties of the material between two
+      copper plate electrodes. As water level rises, the capacitance
+      between the plates increases — detectable as a change in the
+      time it takes to charge a capacitor through the sensor.
     </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Building the Sensor</h3>
+        <p>
+          With 15 minutes to build a proof of concept, the team
+          taped two copper tape electrodes on opposite sides of
+          Claudia's water bottle — a capacitor with water as the
+          dielectric. Alligator clips connected the copper plates
+          to the microcontroller.
+        </p>
+        <img src="../placeholder_assets/cap_setup.jpeg"
+             alt="Copper tape electrodes on water bottle">
+        <p class="caption">Copper tape electrodes taped to either side of the bottle</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Controlled Environment</h3>
+        <p>
+          Initial readings were heavily influenced by hand proximity
+          and external variables. To create a controlled environment,
+          the team shaped a beaker from a Chloe's Clover café coffee
+          cup, poured water in by percentage increments, and recorded
+          readings at each level.
+        </p>
+        <img src="../placeholder_assets/cap_beaker.jpeg"
+             alt="DIY beaker made from coffee cup">
+        <p class="caption">DIY beaker — coffee cup repurposed for controlled fill measurements</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Circuit</h3>
+        <img src="../placeholder_assets/cap_circuit.jpeg"
+             alt="Capacitive sensor circuit on breadboard">
+        <p class="caption">Capacitive sensor circuit — Seeed Studio XIAO ESP32-C3</p>
+      </div>
+    </div>
+
+    <h3>Code</h3>
+    <div class="code-block">// Week 6 — Capacitive Water Level Sensor
+// tx_rx method | Send: Pin 4 | Receive: A0
+// No delay() — uses millis() and C++ class structure
+
+const int TX_PIN  = 4;
+const int RX_PIN  = A0;
+const int LED_PIN = 8;
+
+const int CAP_EMPTY = 250;
+const int CAP_FULL  = 263;
+
+unsigned long lastPrint = 0;
+const int PRINT_MS = 200;
+
+class CapacitiveSensor {
+  private:
+    int txPin, rxPin, ledPin;
+
+  public:
+    CapacitiveSensor(int tx, int rx, int led)
+      : txPin(tx), rxPin(rx), ledPin(led) {}
+
+    void begin() {
+      pinMode(txPin, OUTPUT);
+      pinMode(ledPin, OUTPUT);
+    }
+
+    long read() {
+      long total = 0;
+      int samples = 30;
+      for (int i = 0; i < samples; i++) {
+        pinMode(rxPin, OUTPUT);
+        digitalWrite(rxPin, LOW);
+        digitalWrite(txPin, LOW);
+        delayMicroseconds(10);
+        pinMode(rxPin, INPUT);
+        digitalWrite(txPin, HIGH);
+        delayMicroseconds(10);
+        total += digitalRead(rxPin);
+        digitalWrite(txPin, LOW);
+      }
+      return total;
+    }
+
+    int waterPercent(long raw) {
+      return constrain(map(raw, CAP_EMPTY, CAP_FULL, 0, 100), 0, 100);
+    }
+
+    void updateLED(int pct) {
+      digitalWrite(ledPin, pct > 50 ? HIGH : LOW);
+    }
+
+    String level(int pct) {
+      if (pct &lt; 10)  return "Empty";
+      if (pct &lt; 35)  return "Low";
+      if (pct &lt; 65)  return "Half";
+      if (pct &lt; 90)  return "High";
+      return "Full";
+    }
+};
+
+CapacitiveSensor cap(TX_PIN, RX_PIN, LED_PIN);
+
+void setup() {
+  Serial.begin(9600);
+  cap.begin();
+  Serial.println("=== Capacitive Water Level ===");
+}
+
+void loop() {
+  long raw = cap.read();
+  int pct  = cap.waterPercent(raw);
+  cap.updateLED(pct);
+
+  if (millis() - lastPrint > PRINT_MS) {
+    Serial.print("Raw: ");   Serial.print(raw);
+    Serial.print(" | %: ");  Serial.print(pct);
+    Serial.print(" | ");     Serial.print(cap.level(pct));
+    Serial.print(" | LED: "); Serial.println(pct > 50 ? "ON" : "OFF");
+    lastPrint = millis();
+  }
+}</div>
+
+    <h3>Calibration Data</h3>
+
+    <table class="data-table">
+      <tr>
+        <th>Fill level</th>
+        <th>Raw reading</th>
+        <th>Notes</th>
+      </tr>
+      <tr><td>0%</td><td>250</td><td>Empty bottle</td></tr>
+      <tr><td>25%</td><td>251</td><td>Quarter full</td></tr>
+      <tr><td>50%</td><td>256</td><td>Half full</td></tr>
+      <tr><td>75%</td><td>260</td><td>Three quarters</td></tr>
+      <tr><td>100%</td><td>263</td><td>Full bottle</td></tr>
+    </table>
+
+    <p class="chart-label">Raw reading vs water fill level</p>
+
+    <p class="caption">
+      The relationship is not linear — readings increase slowly at low
+      fill levels and accelerate as the bottle fills, consistent with
+      the non-linear relationship between water height and the dielectric
+      effect on capacitance across the full bottle cross-section.
+    </p>
+
+    <!-- SENSOR 1: HALL -->
+   <h2>Sensor 2: Hall Effect</h2>
+    <span class="sensor-tag">Commercial sensor · Magnetic field detection · LED output</span>
+
+    <p>
+      A Hall effect sensor detects magnetic fields by measuring the
+      voltage across a conductor placed in a magnetic field — the
+      Hall voltage. The analog SS49E outputs a resting voltage of
+      ~2.5V (raw ~512) with no field present, shifting proportionally
+      as a magnet approaches. Here it is used to detect proximity,
+      with an LED that activates when the field is strong enough.
+    </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Circuit & Wiring</h3>
+        <img src="../placeholder_assets/hall_wiring.jpeg"
+             alt="Hall sensor wiring on breadboard">
+        <p class="caption">Hall sensor wired to Arduino Uno R3 — A0 for signal, Pin 8 for LED</p>
+
+        <table class="wiring-table">
+          <tr><th>Sensor pin</th><th>Arduino</th><th>Purpose</th></tr>
+          <tr><td>Pin 1 — VCC</td><td>5V</td><td>Power</td></tr>
+          <tr><td>Pin 2 — GND</td><td>GND</td><td>Ground</td></tr>
+          <tr><td>Pin 3 — OUT</td><td>A0</td><td>Analog signal</td></tr>
+          <tr><td>LED +</td><td>Pin 8 via 220Ω</td><td>Output indicator</td></tr>
+          <tr><td>LED −</td><td>GND</td><td>Ground</td></tr>
+        </table>
+      </div>
+    </div>
 
     <!-- Wiring -->
     <h3>Wiring</h3>
@@ -177,7 +378,8 @@
            controls>
     </video>
     <p class="caption">Serial Monitor resting at 336, shifted with magnet proximity</p>
-
+  <img src="../placeholder_assets/cap_graph.jpeg"
+         alt="Water Level sensor calibration graph — Raw reading vs water fill level">
     <div class="code-block">// Hall Sensor — Basic Reading
 const int HALL_PIN = A0;
 
@@ -272,76 +474,10 @@ void loop() {
     <a class="embrace-link" href="../13_finalproject/index.html">
       → See how this fits into Embrace
     </a>
-
-    <!-- SENSOR 2: CAPACITIVE  -->
-    <h2>Sensor 2: Capacitive (Self-Fabricated)</h2>
-    <span class="sensor-tag">Self-fabricated sensor · Proximity / touch detection</span>
-    
+    <h2>CNC Plan</h2>
     <p>
-      Chloe, Claudia, Matthew and I were tasked with creating 
-      a capacitive sensor to detect water level in a bottle and we
-      had 15 mins to create a proof of concept for the same. We 
-      taped two copper sheets on either side of Claudia's fancy 
-      water bottle to create a sleek and minimalistic design that 
-      could get us some style points. Then we built the circuit, 
-      attached alligator clips to the copper tapes and edited the code 
-      provided on the website to suit our experiment.
+      Self-fabricated circuit board using CNC milling with a 3D printed enclosure.
     </p>
-
-        <img src="../placeholder_assets/cap_setup.jpeg"
-         alt="Experiment- Capacitive Sensor Setup">
-    <p class="caption">Self- fabrication Water level sensing Capacitive sensor Setup</p>
-
-
-       <!-- Wiring -->
-    <h3>Wiring</h3>
-    <img src="../placeholder_assets/cap_wiring.jpeg"
-         alt="Capacitive sensor wiring on breadboard">
-    <p class="caption">Capacitive sensor wired to Arduino Uno R3 — 2 connections total</p>
-
-    <table class="wiring-table">
-      <tr><th>Sensor Pin</th><th>Arduino</th><th>Purpose</th></tr>
-      <tr><td>Pin 1 — VCC</td><td>5V</td><td>Power</td></tr>
-      <tr><td>Pin 2 — GND</td><td>GND</td><td>Ground</td></tr>
-    </table>
-
-    <!-- Basic reading -->
-    <h3>Creating a Controlled Environment</h3>
-    <p>
-      Our first few readings were heavily influenced by moving variables, 
-      so to create a controlled environment for our team, we shaped a 
-      beaker out of a Chloe's Clover cafe coffee cup. We filled the bottle by percentages 0%, 25%, 50%, 75% and 100% and recorded our observations. I need to create a table and a graph to represent that.
-    </p>
-
-    <img src="../placeholder_assets/cap_controlled_env.jpeg"
-         alt="Experiment- Capacitive sensor controlled environment">
-    <p class="caption">Beaker shaped out of Clover Cafe Coffee Cup (alliteration!)</p>
-
-    <!-- Table of Readings -->
-    <h3>Water Level Detection</h3>
-    <p>
-      We filled the bottle by percentages 0%, 25%, 50%, 75% and 100% and 
-      recorded our observations. I have created a table and a graph to represent that. 
-      The slope is not perfectly uniform. It starts flat (rising by only 1 unit from 0% to 25%), 
-      then steepens between 25% and 75%, before slowing down slightly at the end.
-    </p>
-
-    <table class="data-table">
-      <tr>
-        <th>Water Level (%)</th>
-        <th>Raw Reading</th>
-      </tr>
-      <tr><td>0</td><td>250</td></tr>
-      <tr><td>25</td><td>251</td></tr>
-      <tr><td>50</td><td>256</td></tr>
-      <tr><td>75</td><td>260</td></tr>
-      <tr><td>100</td><td>263</td></tr>
-    </table>
-
-    <img src="../placeholder_assets/cap_graph.jpeg"
-         alt="Capacitive sensor graph — reading vs water level">
-    <p class="caption">Raw reading vs Water level in percentage — positive relationship visible</p>
-
   </section>
 </body>
 
