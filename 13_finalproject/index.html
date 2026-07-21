@@ -197,7 +197,7 @@
       their braces correctly.
     </p>
 
-    <img src="../placeholder_assets/embrace_problem.jpg"
+    <img src="../placeholder_assets/embrace_problem.jpeg"
          alt="Traditional neck brace — pressure points and discomfort">
     <p class="caption">Traditional cervical collar — pressure mapping shows ulcer-prone contact zones</p>
 
@@ -278,7 +278,7 @@
       <div class="system-block">
         <p class="sys-tag">Output B</p>
         <h3>Solenoid Valve</h3>
-        <p>Opens to vent air automatically when pressure exceeds safe threshold</p>
+        <p>Opens to flow into 6 valves to inflate to target pressure</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output C</p>
@@ -287,8 +287,8 @@
       </div>
       <div class="system-block">
         <p class="sys-tag">Structure</p>
-        <h3>Lattice Shell</h3>
-        <p>3D printed PLA exoskeleton — breathable, biocompatible contact surfaces</p>
+        <h3>Electronics Shell</h3>
+        <p>3D printed PLA and TPU flexible electronics backpack, waterproof</p>
       </div>
     </div>
 
@@ -299,7 +299,14 @@
       of Embrace's core sensing loop. With no commercial FSR or 
       McKibben actuator available in the lab, both were built 
       from scratch — Velostat + copper tape for the sensor, 
-      latex tube + braided mesh for the actuator.
+      latex tube + braided mesh for the actuator. In Assignment 8, the 
+      solenoid valve was integrated to distribute air pressure to 6 valves,
+      to enable self sizing of each bladder on it's own. The Arduino 
+      controlled the pump and valve to inflate the actuator to a target 
+      pressure using a 12 volt source, a MOSFET and a mini air pump that is detachable 
+      once the brace is fitted. A PLA-TPU attachment was 3D printed to house the 
+      electronics. The FSR successfully detected pressure, and the Arduino controlled 
+      the pump to inflate the actuator to a target pressure, demonstrating the feasibility of the self-sizing concept.
     </p>
 
     <a class="proof-link" href="../04_microcontroller/index.html">
@@ -307,9 +314,9 @@
     </a>
 
     <div class="img-duo" style="margin-top:1.5rem;">
-      <img src="../placeholder_assets/embrace_circuit.jpg"
+      <img src="../placeholder_assets/embrace_circuit.jpeg"
            alt="Embrace proof of concept circuit">
-      <img src="../placeholder_assets/embrace_serial.jpg"
+      <img src="../placeholder_assets/embrace_serial.jpeg"
            alt="Serial Monitor — live pressure readings">
     </div>
     <p class="caption">Left: proof of concept circuit · Right: Serial Monitor showing live pressure classification</p>
@@ -414,7 +421,7 @@
     </table>
 
     <!-- MILESTONES -->
-    <h2>Build Milestones</h2>
+    <!-- <h2>Build Milestones</h2>
 
     <ul class="milestone-list">
       <li>
@@ -453,7 +460,7 @@
         <span class="ms-dot next"></span>
         <span><strong>Final presentation</strong> — worn with a red printed tie, naturally</span>
       </li>
-    </ul>
+    </ul> -->
 
   </section>
 </body>

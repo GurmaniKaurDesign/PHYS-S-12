@@ -1,32 +1,470 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 8 · CNC & Molding</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p { margin-bottom: 0; font-style: italic; }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img,
+    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
+    .detour-card {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .detour-card .detour-num {
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.4rem;
+    }
+    .detour-card h3 { margin-top: 0; margin-bottom: 0.5rem; font-size: 1.1rem; }
+    .detour-card p { font-size: 0.9rem; margin-bottom: 0; max-width: none; }
+    .detour-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      margin-bottom: 0.75rem;
+    }
+    .detour-badge.blocked { background: #f0d0d0; color: #8a1f1f; }
+    .detour-badge.redirected { background: #f0e6c8; color: #8a6a1f; }
+    .detour-badge.resolved { background: #d8e8d0; color: #2f5a2f; }
+    .specs-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 1rem 0;
+    }
+    .specs-table th {
+      text-align: left;
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      padding: 0.5rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .specs-table td {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--secondary-color);
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+    }
+    .specs-table tr:last-child td { border-bottom: none; }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .two-col-block {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.25rem 1.5rem;
+    }
+    .two-col-block h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .two-col-block p { font-size: 0.9rem; margin-bottom: 0; max-width: none; }
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+    .team-credit {
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      color: var(--accent-color);
+      letter-spacing: 0.06em;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .sensor-tag {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 8: CNC</h1>
-      
+<body>
+  <section class="blog">
+
+    <p class="blog-meta">Week 08 · CNC & Molding · 21st July 2026</p>
+    <h1>A Cover for<br>Every Circuit</h1>
+    <p class="team-credit">Collaboration with Matthew</p>
+
+    <div class="concept-highlight">
       <p>
-        Design and fabricate something using one of the CNC machines in the lab. Make sure to include some kind of post processing in your design.
+        Matthew custom-milled a PCB for a XIAO ESP32-C3,
+        rotary encoder, and LED. Gurmani measured it with a vernier
+        caliper, modelled a weatherproof translucent cover in
+        SolidWorks, and vacuum formed it from PETG — after
+        five days, three machines, four redirects, and more
+        lab closures than I'd like to count.
       </p>
-      
-    </section>
-  </body>
+    </div>
 
-  <footer>See config.js</footer>
+    <!-- PART 1: PCB -->
+    <h2>Part 1 — The PCB</h2>
+    <span class="sensor-tag">Matthew · KiCad · CNC PCB milling</span>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <p>
+      Matthew designed a custom PCB in KiCad featuring pin
+      holes for the XIAO ESP32-C3, a rotary encoder, and an
+      LED. He used a website built by a past lab TA to
+      generate toolpaths for the PCB milling CNC. Getting it
+      right took four to five attempts — each iteration
+      tightening tolerances until the traces were clean and
+      the pin holes landed exactly where they needed to be.
+    </p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/pcb_kicad.jpeg"
+           alt="KiCad PCB design">
+      <img src="../placeholder_assets/pcb_milled.jpeg"
+           alt="Final milled PCB with components soldered">
+    </div>
+    <p class="caption">Left: KiCad design · Right: final milled PCB — XIAO ESP32-C3, rotary encoder, LED</p>
+    <div class="download-row">
+          <a class="download-btn"
+             href="../placeholder_assets/first_pcb.kicad_pcb"
+             download>↓ Download KiCad PCB File</a>
+          <a class="download-btn"
+             href="../placeholder_assets/first_pcb.kicad_prl"
+             download>↓ Download KiCad PRL File</a>
+          <a class="download-btn"
+             href="../placeholder_assets/first_pcb.kicad_pro"
+             download>↓ Download KiCad PRO File</a>
+        </div>
+    
+    <!-- PART 2: COVER -->
+    <h2>Part 2 — The Cover</h2>
+    <span class="sensor-tag">Guru · SolidWorks CAD · ShopBot- Aspire CNC · PETGVacuum forming </span>
+
+    <p>
+      Once the PCB was finalised, I measured its dimensions
+      using a vernier caliper and modelled a weatherproof
+      translucent cover in SolidWorks — approximately 3
+      inches tall and 1.3 inches wide, shaped to the PCB's
+      stepped profile, with a hole positioned so the rotary
+      encoder knob can poke through.
+    </p>
+
+    <table class="specs-table">
+      <tr><th>Parameter</th><th>Value</th></tr>
+      <tr><td>Height</td><td>~3.0 in</td></tr>
+      <tr><td>Width</td><td>~1.3 in</td></tr>
+      <tr><td>Cover material</td><td>PETG sheet — vacuum formed</td></tr>
+      <tr><td>Positive material</td><td>MDF — 3 CNC-milled layers, laminated</td></tr>
+      <tr><td>Edge treatment</td><td>Subtle chamfer — 3/4 inch chisel</td></tr>
+      <tr><td>CNC machine</td><td>ShopBot with 1 inch endmill</td></tr>
+      <tr><td>CAM software</td><td>Aspire</td></tr>
+      <tr><td>CAD software</td><td>SolidWorks</td></tr>
+    </table>
+
+    <!-- THE JOURNEY -->
+    <h2>The Journey of Five Days and Four Redirects</h2>
+    <p>
+      Getting to the final process was not straightforward.
+      Every path I tried hit a wall — a broken machine, an
+      unsafe cut depth, a closed lab. Here's the honest account.
+    </p>
+
+    <div class="detour-card">
+      <p class="detour-num">Detour 01</p>
+      <span class="detour-badge blocked">Blocked — software limitation</span>
+      <h3>CNC → STL import greyed out</h3>
+      <p>
+        Asked a TA if I could use the CNC to cut one deep
+        piece from my SolidWorks STL. We tried to find the
+        STL import option in the software but it was
+        completely greyed out — unselectable. Neither of us
+        could figure out how to enable it. I was redirected
+        to the MonoFab Roland wax milling machine.
+      </p>
+    </div>
+
+    <div class="detour-card">
+      <p class="detour-num">Detour 02</p>
+      <span class="detour-badge blocked">Blocked — machine down + unsafe cut depth</span>
+      <h3>MonoFab → broken machine + endmill risk</h3>
+      <p>
+        Converted the file to a wax positive, set it up
+        after several iterations of adjusting draft angles
+        — then lab hours ended. Came back the next day to
+        find the MonoFab completely kaputt. Waited the
+        entire session. The other TA then flagged the cut
+        as too deep anyway — the cutting region of the
+        endmill ends before the cut depth completes, risking
+        a snapped tool. Redirected back to the CNC.
+      </p>
+    </div>
+
+    <div class="detour-card">
+      <p class="detour-num">Detour 03</p>
+      <span class="detour-badge redirected">Progress — then lab closed</span>
+      <h3>Back to CNC → DWG + Aspire</h3>
+      <p>
+        Converted the file to DWG for Aspire with the
+        ShopBot. Found a 1 inch endmill. Had a viable path
+        — and the lab closed for the night.
+      </p>
+    </div>
+
+    <div class="detour-card">
+      <p class="detour-num">Detour 04</p>
+      <span class="detour-badge blocked">Blocked — unsafe setup + lab closed again</span>
+      <h3>Pine attempt → insecure workholding</h3>
+      <p>
+        The original TA suggested using a thick piece of
+        pine instead — single deep cut, then vacuum form
+        over it, clamped with screws on the outside of a
+        scrap piece of wood. Waited for the machine to
+        become free. Lab closed again before the cut. The
+        next day, the other TA reviewed the setup and
+        flagged it: pine at that thickness wasn't secure
+        enough in that configuration, and the same endmill
+        depth problem would have returned. Final redirect:
+        laminated MDF.
+      </p>
+    </div>
+
+    <div class="detour-card">
+      <p class="detour-num">Resolution</p>
+      <span class="detour-badge resolved">It worked</span>
+      <h3>Laminated MDF → vacuum formed PETG</h3>
+      <p>
+        Mill multiple thin MDF layers separately, laminate
+        them together to reach full height. No endmill depth
+        problem, no structural risk. Sand smooth, chamfer
+        edges lightly with a chisel, vacuum form PETG over
+        the positive. Done.
+      </p>
+    </div>
+
+    <!-- FINAL PROCESS -->
+    <h2>Final Process</h2>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>SolidWorks Model</h3>
+        <p>
+          Measured PCB dimensions with a vernier caliper
+          and modelled the stepped cover profile in
+          SolidWorks — matching the PCB's two-tier height
+          with a hole for the rotary encoder.
+        </p>
+        <div class="download-row">
+          <a class="download-btn"
+             href="../placeholder_assets/PCB_Cover_silicone_version-Gurmani_Kaur.STL"
+             download>↓ Download STL</a>
+          <a class="download-btn"
+             href="../placeholder_assets/PCB_Cover_Milled_Version-Gurmani.DXF"
+             download>↓ Download DXF</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>CNC Milling — MDF Layers</h3>
+        <p>
+          Set up the DWG in Aspire for the ShopBot CNC
+          with a 1 inch endmill. Milled three identical
+          MDF cutouts — thin enough to stay within the
+          endmill's safe cutting depth, designed to be
+          stacked to the full cover height.
+        </p>
+        <img src="../placeholder_assets/cover_mdf_single.jpeg"
+             alt="Single CNC-cut MDF layer on cutting mat">
+        <p class="caption">Single MDF layer fresh off the ShopBot CNC</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Laminating + Clamping</h3>
+        <p>
+          Laminated the three MDF layers with wood glue,
+          clamped the stack, and left it to cure for an
+          hour. The result: a solid stepped block at full
+          cover height — no single deep cut required.
+        </p>
+        <div class="img-trip">
+          <img src="../placeholder_assets/cover_clamp.jpeg"
+               alt="MDF stack in clamps — angle 1">
+        </div>
+        <p class="caption">Three MDF layers laminated and clamped — one hour cure time</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>Sanding + Edge Chamfer</h3>
+        <p>
+          Sanded the laminated block smooth — glue lines
+          between layers needed to disappear before vacuum
+          forming since any surface texture transfers
+          directly to the PETG. Used a 3/4 inch chisel to
+          add a subtle chamfer to the edges so the PETG
+          would release cleanly after forming.
+        </p>
+        <div class="img-trip">
+          <img src="../placeholder_assets/cover_positive.jpeg"
+               alt="Sanded MDF positive — front view">
+        </div>
+        <p class="caption">Sanded and chamfered MDF positive — ready for vacuum forming</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">05</p>
+      <div class="step-content">
+        <h3>Vacuum Forming — PETG</h3>
+        <p>
+          Vacuum formed using a PETG sheet on the lab's
+          desktop vacuum forming machine. The PETG heated
+          until pliable, the positive was raised into it,
+          and the vacuum pulled the sheet tight around every
+          surface — including into the step detail and
+          around the encoder hole position.
+        </p>
+        <img src="../placeholder_assets/cover_vacform_on.jpeg"
+             alt="PETG freshly vacuum formed still on the MDF positive">
+        <p class="caption">PETG pulled tight around the MDF positive — fresh off the machine</p>
+        <img src="../placeholder_assets/cover_petg_separated.jpeg"
+             alt="PETG cover next to MDF positive after separation">
+        <p class="caption">Positive and cover side by side after separation</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">06</p>
+      <div class="step-content">
+
+        <h3>Trim + Fit to PCB</h3>
+        <p>
+          Cut the cover out from the excess PETG sheet and
+          fitted it over the assembled PCB — the XIAO
+          ESP32-C3 sits on the lower tier, the rotary
+          encoder knob pokes through the upper tier. The
+          PETG is translucent throughout.
+        </p>
+        <p class="caption">Cover fitted over PCB — rotary encoder shaft poking through</p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/cover_on_pcb_1.jpeg"
+               alt="Cover on PCB">
+          <img src="../placeholder_assets/cover_on_pcb_2.jpeg"
+               alt="Cover on PCB">
+        </div>
+        <p class="caption">Translucent PETG over copper PCB</p>
+      </div>
+    </div>
+
+<!-- FINAL RESULT  -->
+<h2>Final Result</h2>
+
+    <p class="caption">Final vacuum formed PETG cover — fitted over custom milled PCB</p>
+
+    <div class="two-col">
+      <div class="two-col-block">
+        <h3>What worked</h3>
+        <p>
+          Laminating thin MDF layers solved every problem
+          the previous approaches hit. The PETG picked up
+          the stepped profile cleanly. The subtle chisel
+          chamfer was enough to help release without
+          distorting the edges.
+        </p>
+      </div>
+      <div class="two-col-block">
+        <h3>What I'd change</h3>
+        <p>
+          Start with laminated MDF from day one. A more
+          aggressive edge radius would give the PETG
+          cleaner corners — the chisel chamfer was subtle
+          enough that the sharp edges transferred slightly
+          to the cover. More sanding passes before forming
+          would also reduce surface texture transfer.
+        </p>
+      </div>
+    </div>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
