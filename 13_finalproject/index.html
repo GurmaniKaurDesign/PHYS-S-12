@@ -14,7 +14,6 @@
       border-radius: 0 4px 4px 0;
     }
     .concept-highlight p { margin-bottom: 0; font-style: italic; }
-
     .values-row {
       display: flex;
       gap: 1rem;
@@ -30,7 +29,6 @@
       border: 1px solid var(--text-color);
       border-radius: 2px;
     }
-
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -45,7 +43,6 @@
     }
     .two-col-block h3 { margin-top: 0; margin-bottom: 0.5rem; }
     .two-col-block p { font-size: 0.9rem; margin-bottom: 0; max-width: none; }
-
     .system-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -68,8 +65,6 @@
     }
     .system-block h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1rem; }
     .system-block p { font-size: 0.85rem; margin-bottom: 0; max-width: none; }
-
-    /* BOM table */
     .bom-table {
       width: 100%;
       border-collapse: collapse;
@@ -107,32 +102,24 @@
     .bom-cat.structure   { background: #f0e6c8; color: #8a6a1f; }
     .bom-cat.sensing     { background: #f0d8e8; color: #6b1a4a; }
     .tbd { color: var(--accent-color); font-family: var(--mono-font-family); font-size: 0.78rem; }
-
-    .milestone-list {
-      list-style: none;
-      padding: 0;
-      margin: 1rem 0;
-    }
-    .milestone-list li {
+    .process-step {
       display: grid;
-      grid-template-columns: 24px 1fr;
-      gap: 1rem;
-      padding: 0.75rem 0;
-      border-bottom: 1px solid var(--secondary-color);
-      font-size: 0.9rem;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
       align-items: start;
     }
-    .milestone-list li:last-child { border-bottom: none; }
-    .ms-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      margin-top: 4px;
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
     }
-    .ms-dot.done   { background: var(--accent-color); }
-    .ms-dot.active { background: #BA7517; }
-    .ms-dot.next   { background: var(--secondary-color); border: 1px solid var(--accent-color); }
-
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img,
+    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
     .proof-link {
       display: inline-flex;
       align-items: center;
@@ -145,9 +132,50 @@
       border-bottom: 1px solid var(--accent-color);
       padding-bottom: 1px;
     }
-
+    .next-steps {
+      background: var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+    }
+    .next-steps h3 { margin-top: 0; }
+    .next-steps ul {
+      margin-bottom: 0;
+      padding-left: 1.25rem;
+    }
+    .next-steps li {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .next-steps li:last-child { margin-bottom: 0; }
+    .code-block {
+      background: var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.82rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: 1rem 0;
+      white-space: pre;
+    }
+    .oscilloscope-placeholder {
+      border: 2px dashed var(--secondary-color);
+      border-radius: 4px;
+      padding: 3rem 2rem;
+      text-align: center;
+      margin: 1rem 0;
+    }
+    .oscilloscope-placeholder p {
+      color: var(--accent-color);
+      font-family: var(--mono-font-family);
+      font-size: 0.8rem;
+      margin: 0;
+      letter-spacing: 0.08em;
+    }
     @media (max-width: 768px) {
       .two-col { grid-template-columns: 1fr; }
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
     }
   </style>
 </head>
@@ -166,10 +194,10 @@
 
     <div class="concept-highlight">
       <p>
-        A self-sizing, breathable, smart neck brace that prioritises 
-        patient comfort and disaster relief without compromising 
-        immobilisation. A device that feels like an extension of 
-        the self — not an intrusion.
+        A self-sizing, breathable, smart neck brace that
+        prioritises patient comfort without compromising
+        immobilisation. A device that feels like an extension
+        of the self — not an intrusion.
       </p>
     </div>
 
@@ -181,158 +209,332 @@
       <span class="value-pill">Biomedical Design</span>
     </div>
 
-    <!-- THE PROBLEM -->
+    <!-- ══════════════════════ THE PROBLEM ══════════════════════ -->
     <h2>The Problem</h2>
     <p>
-      Standard emergency and post-surgical neck braces are built 
-      like ancient torture devices. They trap heat and sweat, 
-      compress the jaw, and cause severe pressure ulcers on 
-      the chin and collarbones. Paramedics have to guess sizing 
-      under high-stress conditions. Patients endure weeks of 
-      discomfort in a device not designed for their body.
+      Standard emergency and post-surgical neck braces cause
+      as much harm as they prevent. They trap heat and sweat,
+      compress the jaw, and cause severe pressure ulcers on
+      the chin and collarbones. Paramedics have to guess sizing
+      under high-stress conditions — there are only a handful
+      of standard sizes for the full range of human necks.
+      Patients endure weeks of avoidable discomfort in a device
+      not designed for their body, reducing compliance and
+      increasing recovery time.
     </p>
     <p>
-      Comfort is not a luxury feature in medical equipment. 
-      It's compliance. Patients who aren't in pain wear 
+      Comfort is not a luxury feature in medical equipment.
+      It's compliance. Patients who aren't in pain wear
       their braces correctly.
     </p>
 
     <img src="../placeholder_assets/embrace_problem.jpeg"
-         alt="Traditional neck brace — pressure points and discomfort">
-    <p class="caption">Traditional cervical collar — pressure mapping shows ulcer-prone contact zones</p>
+         alt="Traditional cervical collar — pressure points">
+    <p class="caption">Traditional cervical collar — one size rarely fits all</p>
 
-    <!-- THE CONCEPT -->
+    <!-- ══════════════════════ THE CONCEPT ══════════════════════ -->
     <h2>The Concept</h2>
     <p>
-      Embrace takes an exoskeleton-like approach — a 3D-printed 
-      breathable lattice shell housing soft pneumatic McKibben 
-      actuators that automatically conform to the patient's neck 
-      when inflated. A handmade Velostat pressure sensor reads 
-      fit in real time, and an Arduino Uno R3 controls the 
-      inflation pump until the correct pressure is reached.
+      Embrace takes a soft robotics approach — a spandex shell
+      with sewn internal pockets housing inflatable McKibben
+      actuators that automatically conform to the patient's neck
+      when pressurised. A Velostat pressure sensor embedded in
+      the fabric reads fit in real time, and a microcontroller
+      controls the pump and solenoid valve until the correct
+      pressure is reached independently in each zone.
     </p>
 
     <div class="two-col">
       <div class="two-col-block">
         <h3>Self-Sizing</h3>
         <p>
-          McKibben pneumatic actuators — soft robotic bladders 
-          inside a braided mesh — expand radially when inflated, 
-          distributing pressure evenly across the neck surface. 
-          No manual sizing. No guessing under pressure.
+          McKibben pneumatic actuators — latex tubes inside
+          braided mesh sleeves — expand radially when
+          pressurised, distributing force evenly across the
+          neck surface. No manual sizing. No guessing under
+          pressure.
         </p>
       </div>
       <div class="two-col-block">
         <h3>Breathable Shell</h3>
         <p>
-          A 3D-printed PLA lattice structure allows airflow 
-          through the brace, eliminating heat and sweat 
-          buildup — the primary cause of skin breakdown 
-          in long-term brace wear.
+          Pink spandex fabric chosen for both stretch and
+          breathability — the elasticity accommodates
+          inflation while the weave allows airflow, reducing
+          the heat and sweat buildup that causes skin
+          breakdown in long-term brace wear.
         </p>
       </div>
       <div class="two-col-block">
         <h3>Smart Feedback</h3>
         <p>
-          Pressure sensing via FSR detects under-tightening 
-          and over-tightening. A haptic or LED output tells 
-          the patient and caregiver the brace is correctly 
-          positioned — without needing to remove it to check.
+          FSR pressure sensing detects under-tightening
+          and over-tightening. The system inflates until
+          target pressure is reached, then holds — no
+          continuous monitoring needed from caregiver.
         </p>
       </div>
       <div class="two-col-block">
-        <h3>Objective</h3>
+        <h3>Design Intent</h3>
         <p>
-          Study current brace pressure points and FDA 
-          regulations, then design a replacement that 
-          integrates wearable technology and soft robotics 
-          to create a device that is not only functional 
-          but humane.
+          Research into current brace pressure points and
+          FDA regulations informed every design decision.
+          The goal: a device that is not only functional
+          but humane — one that a patient would actually
+          choose to wear.
         </p>
       </div>
     </div>
 
-    <img src="../placeholder_assets/embrace_concept.jpg"
-         alt="Embrace concept sketches and renders">
-    <p class="caption">Embrace — concept sketches and system diagram</p>
-
-    <!-- SYSTEM -->
+    <!-- ══════════════════════ SYSTEM ARCHITECTURE ══════════════════════ -->
     <h2>System Architecture</h2>
 
     <div class="system-grid">
       <div class="system-block">
         <p class="sys-tag">Input</p>
-        <h3>Pressure Sensor</h3>
-        <p>FSR reads contact force between brace and neck surface continuously</p>
+        <h3>Velostat FSR</h3>
+        <p>Handmade pressure sensor embedded in spandex fabric — reads contact force at neck interface continuously</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Controller</p>
-        <h3>Arduino Uno R3</h3>
-        <p>Maps pressure to fit zones — too loose, good fit, too tight</p>
+        <h3>XIAO ESP32-C3</h3>
+        <p>Maps pressure to fit zones — too loose, good fit, too tight — controls pump and valve independently</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output A</p>
-        <h3>Air Pump</h3>
-        <p>Inflates McKibben actuators until target pressure is reached</p>
+        <h3>Mini Air Pump</h3>
+        <p>Pressurises the system — detachable once the brace reaches target fit</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output B</p>
         <h3>Solenoid Valve</h3>
-        <p>Opens to flow into 6 valves to inflate to target pressure</p>
+        <p>Distributes air to McKibben actuator pockets — controls inflation per zone</p>
       </div>
       <div class="system-block">
-        <p class="sys-tag">Output C</p>
-        <h3>Haptic / LED</h3>
-        <p>Confirms correct fit to patient and caregiver without removing brace</p>
+        <p class="sys-tag">Actuator</p>
+        <h3>McKibben Muscles</h3>
+        <p>Handmade from latex tubing + braided mesh — expand radially under pressure to conform to neck</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Structure</p>
-        <h3>Electronics Shell</h3>
-        <p>3D printed PLA and TPU flexible electronics backpack, waterproof</p>
+        <h3>Spandex Shell</h3>
+        <p>Pink spandex sewn with internal pockets and sleeves — houses actuators and FSR in a wearable form</p>
       </div>
     </div>
 
-    <!-- PROOF OF CONCEPT -->
-    <h2>Proof of Concept</h2>
+    <!-- ══════════════════════ MVP ══════════════════════ -->
+    <h2>MVP — Proof of Concept</h2>
     <p>
-      Week 4's programming assignment became the first live test 
-      of Embrace's core sensing loop. With no commercial FSR or 
-      McKibben actuator available in the lab, both were built 
-      from scratch — Velostat + copper tape for the sensor, 
-      latex tube + braided mesh for the actuator. In Assignment 8, the 
-      solenoid valve was integrated to distribute air pressure to 6 valves,
-      to enable self sizing of each bladder on it's own. The Arduino 
-      controlled the pump and valve to inflate the actuator to a target 
-      pressure using a 12 volt source, a MOSFET and a mini air pump that is detachable 
-      once the brace is fitted. A PLA-TPU attachment was 3D printed to house the 
-      electronics. The FSR successfully detected pressure, and the Arduino controlled 
-      the pump to inflate the actuator to a target pressure, demonstrating the feasibility of the self-sizing concept.
+      The MVP demonstrates the core Embrace concept as a
+      wearable prototype: a sewn spandex brace with embedded
+      pressure sensing and pneumatic self-sizing. This is a
+      proof of concept for both form and function — the first
+      time all the components came together in a single
+      wearable object.
     </p>
 
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>The Brace — Sewn Spandex Shell</h3>
+        <p>
+          Sewn by hand on a sewing machine — first time
+          using one. Pink spandex chosen for its calming
+          quality and stretch properties that accommodate
+          inflation. Internal pockets with sleeves hold
+          the McKibben actuators in position around the
+          neck. The Velostat FSR is sandwiched inside
+          the fabric layers at the neck contact point.
+        </p>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/embrace_brace.mp4"
+                  type="video/mp4">
+        </video>
+        <p class="caption">Sewn spandex brace — internal pockets for McKibben actuators, embedded FSR</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>The Circuit — Pump + Solenoid + MOSFET</h3>
+        <p>
+          XIAO ESP32-C3 controls a mini air pump and
+          solenoid valve via N-channel MOSFETs. The pump
+          pressurises the system; the solenoid valve
+          distributes air into the actuator pockets.
+          Powered by a bench power supply for the MVP —
+          a portable 12V solution is planned for v2.
+          The FSR reads pressure on analog pin A0 and
+          the loop closes when target fit is detected.
+        </p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/embrace_circuit.jpeg"
+               alt="MVP circuit — XIAO, MOSFET, pump, solenoid">
+          <img src="../placeholder_assets/embrace_serial.jpeg"
+               alt="Serial Monitor — live pressure readings">
+        </div>
+        <p class="caption">Left: MVP circuit · Right: Serial Monitor — pressure classification live</p>
+
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/embrace_1.mp4"
+                  type="video/mp4">
+        </video>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/embrace_2.mp4"
+                  type="video/mp4">
+        </video>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/embrace_3.mp4"
+                  type="video/mp4">
+        </video>
+        <p class="caption">Circuit in operation — pump inflating McKibben actuators via solenoid valve</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <!-- <h3>System Demo — Brace + Electronics Together</h3>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/WhatsApp_Video_2026-07-22_at_00_46_21.mp4"
+                  type="video/mp4">
+        </video>
+        <p class="caption">Full system demo — brace worn, FSR reading pressure, pump inflating actuators</p>
+      </div>
+    </div> -->
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>Oscilloscope Measurement</h3>
+        <p>
+          Output signal from the solenoid valve control
+          pin measured on the oscilloscope — confirming
+          the MOSFET switching cleanly between HIGH and
+          LOW states in response to FSR pressure readings.
+          The waveform shows clean digital switching with
+          no significant noise on the control signal.
+        </p>
+        <div class="oscilloscope-placeholder">
+          <p>OSCILLOSCOPE READING — TO BE ADDED</p>
+        </div>
+        <p class="caption">Oscilloscope — solenoid valve control signal, measured at lab tomorrow</p>
+      </div>
+    </div>
+
+    <!--  CODE -->
+    <h2>Code</h2>
+    <p>
+      C++ for XIAO ESP32-C3. Uses C++ class structure,
+      <code>millis()</code> for non-blocking timing — no
+      <code>delay()</code> calls. Closed-loop: FSR reads
+      pressure, pump inflates until target, solenoid holds.
+    </p>
+
+    <div class="code-block">// Embrace MVP — Self-Sizing Brace
+// Velostat FSR on A0 | Pump on D9 | Solenoid on D10
+// XIAO ESP32-C3 | No delay() | C++ class structure
+
+const int FSR_PIN  = A0;
+const int PUMP_PIN = D9;
+const int SOL_PIN  = D10;
+
+// Tune by watching Serial Monitor while wearing brace
+const int TOO_LOOSE   = 150;
+const int GOOD_FIT    = 450;
+const int TOO_TIGHT   = 700;
+
+unsigned long lastPrint = 0;
+const int PRINT_MS = 100;
+
+class BraceController {
+  private:
+    int fsrPin, pumpPin, solPin;
+    int looseThr, fitThr, tightThr;
+
+  public:
+    BraceController(int fsr, int pump, int sol,
+                    int loose, int fit, int tight)
+      : fsrPin(fsr), pumpPin(pump), solPin(sol),
+        looseThr(loose), fitThr(fit), tightThr(tight) {}
+
+    void begin() {
+      pinMode(pumpPin, OUTPUT);
+      pinMode(solPin,  OUTPUT);
+      digitalWrite(pumpPin, LOW);
+      digitalWrite(solPin,  LOW);
+    }
+
+    int readPressure() {
+      int raw = analogRead(fsrPin);
+      // ESP32 12-bit ADC
+      return map(raw, 0, 4095, 0, 1000);
+    }
+
+    void update() {
+      int p = readPressure();
+
+      if (p &lt; looseThr) {
+        // Not worn — inflate
+        digitalWrite(pumpPin, HIGH);
+        digitalWrite(solPin,  LOW);
+
+      } else if (p &lt; fitThr) {
+        // Too loose — keep inflating
+        digitalWrite(pumpPin, HIGH);
+        digitalWrite(solPin,  LOW);
+
+      } else if (p &lt;= tightThr) {
+        // Good fit — hold pressure
+        digitalWrite(pumpPin, LOW);
+        digitalWrite(solPin,  LOW);
+
+      } else {
+        // Too tight — vent
+        digitalWrite(pumpPin, LOW);
+        digitalWrite(solPin,  HIGH);
+      }
+
+      if (millis() - lastPrint > PRINT_MS) {
+        Serial.print("Pressure: ");
+        Serial.print(p);
+        Serial.print("  |  ");
+        if      (p &lt; looseThr)  Serial.println("NOT WORN — inflating");
+        else if (p &lt; fitThr)    Serial.println("TOO LOOSE — inflating");
+        else if (p &lt;= tightThr) Serial.println("✓ GOOD FIT — holding");
+        else                     Serial.println("⚠ TOO TIGHT — venting");
+        lastPrint = millis();
+      }
+    }
+};
+
+BraceController brace(FSR_PIN, PUMP_PIN, SOL_PIN,
+                      TOO_LOOSE, GOOD_FIT, TOO_TIGHT);
+
+void setup() {
+  Serial.begin(115200);
+  brace.begin();
+  Serial.println("=== Embrace MVP Ready ===");
+}
+
+void loop() {
+  brace.update();
+}</div>
+
+    <!-- PREVIOUS POC  -->
+    <h2>Previous Proof of Concept</h2>
+    <p>
+      Week 4's programming assignment was the first live test
+      of Embrace's sensing loop — handmade Velostat FSR and
+      McKibben actuator, closed-loop inflation logic on Arduino.
+    </p>
     <a class="proof-link" href="../04_microcontroller/index.html">
-      → View full Week 4 documentation
+      → View Week 4 documentation
     </a>
 
-    <div class="img-duo" style="margin-top:1.5rem;">
-      <img src="../placeholder_assets/embrace_circuit.jpeg"
-           alt="Embrace proof of concept circuit">
-      <img src="../placeholder_assets/embrace_serial.jpeg"
-           alt="Serial Monitor — live pressure readings">
-    </div>
-    <p class="caption">Left: proof of concept circuit · Right: Serial Monitor showing live pressure classification</p>
-
-    <video controls muted loop playsinline style="width:100%;border-radius:4px;margin-bottom:0.5rem;">
-      <source src="../placeholder_assets/embrace_demo.mp4" type="video/mp4">
-    </video>
-    <p class="caption">Closed-loop test — FSR detects pressure, Arduino controls pump inflation</p>
-
-    <!-- BILL OF MATERIALS -->
+    <!-- BOM -->
     <h2>Bill of Materials</h2>
-    <p>
-      Component list for Embrace v1. Quantities marked TBD 
-      are dependent on final form factor and sizing decisions.
-    </p>
-
     <table class="bom-table">
       <tr>
         <th>#</th>
@@ -343,124 +545,97 @@
       </tr>
       <tr>
         <td>1</td>
-        <td>Arduino Uno R3</td>
-        <td>Microcontroller — reads sensor, controls pump and valve</td>
+        <td>XIAO ESP32-C3</td>
+        <td>Microcontroller — reads FSR, controls pump and solenoid</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
         <td>1</td>
       </tr>
       <tr>
         <td>2</td>
-        <td>Commercial FSR (e.g. Interlink FSR 402)</td>
-        <td>Pressure sensing at brace-neck interface</td>
+        <td>Velostat + copper tape FSR</td>
+        <td>Pressure sensing at neck interface</td>
         <td><span class="bom-cat sensing">Sensing</span></td>
-        <td class="tbd">TBD</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>3</td>
-        <td>Commercial McKibben actuator</td>
-        <td>Self-sizing pneumatic bladder</td>
+        <td>Handmade McKibben actuators</td>
+        <td>Self-sizing pneumatic bladders — latex tube + braided mesh</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td class="tbd">TBD</td>
+        <td>6</td>
       </tr>
       <tr>
         <td>4</td>
-        <td>Mini air pump</td>
-        <td>Inflates McKibben actuators to target pressure</td>
+        <td>Mini air pump (AheadPump)</td>
+        <td>Pressurises system — detachable post-fit</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td class="tbd">TBD</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>5</td>
-        <td>Solenoid valve (5V, normally closed)</td>
-        <td>Automatic deflation when pressure exceeds safe threshold</td>
+        <td>Solenoid valve (normally closed)</td>
+        <td>Distributes air to actuator zones</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td class="tbd">TBD</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>6</td>
-        <td>10kΩ resistor</td>
-        <td>FSR voltage divider</td>
+        <td>N-channel MOSFET (IRLZ44N)</td>
+        <td>Drives pump and solenoid from 3.3V logic</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
-        <td class="tbd">TBD</td>
+        <td>2</td>
       </tr>
       <tr>
         <td>7</td>
-        <td>Vibration motor / haptic buzzer</td>
-        <td>Fit confirmation feedback to patient</td>
+        <td>10kΩ resistor</td>
+        <td>FSR voltage divider</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
-        <td class="tbd">TBD</td>
+        <td>1</td>
       </tr>
       <tr>
         <td>8</td>
-        <td>PLA filament</td>
-        <td>3D printed breathable lattice shell</td>
-        <td><span class="bom-cat structure">Structure</span></td>
-        <td class="tbd">TBD</td>
+        <td>Flyback diode (1N4007)</td>
+        <td>Protects MOSFET from solenoid back-EMF</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td>2</td>
       </tr>
       <tr>
         <td>9</td>
-        <td>Flexible TPU filament</td>
-        <td>Soft biocompatible contact surfaces</td>
+        <td>Pink spandex fabric</td>
+        <td>Brace shell — stretch, breathability, calming colour</td>
         <td><span class="bom-cat structure">Structure</span></td>
-        <td class="tbd">TBD</td>
+        <td>~0.5m</td>
       </tr>
       <tr>
         <td>10</td>
         <td>Pneumatic tubing + connectors</td>
-        <td>Air routing between pump, valve, and actuators</td>
+        <td>Air routing from pump to solenoid to actuators</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td class="tbd">TBD</td>
+        <td>TBD</td>
       </tr>
       <tr>
         <td>11</td>
-        <td>Jumper wires + breadboard</td>
-        <td>Circuit prototyping and connections</td>
+        <td>Bench power supply (12V)</td>
+        <td>Powers pump — to be replaced with portable 12V battery pack</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
-        <td class="tbd">TBD</td>
+        <td>1</td>
       </tr>
     </table>
 
-    <!-- MILESTONES -->
-    <!-- <h2>Build Milestones</h2>
+    <!-- NEXT STEPS -->
+    <h2>Next Steps — v2</h2>
 
-    <ul class="milestone-list">
-      <li>
-        <span class="ms-dot done"></span>
-        <span><strong>Pressure sensing loop</strong> — Velostat FSR + Arduino reading and classifying pressure in real time ✓</span>
-      </li>
-      <li>
-        <span class="ms-dot done"></span>
-        <span><strong>Pneumatic inflation</strong> — Arduino controlling mini air pump via closed-loop FSR feedback ✓</span>
-      </li>
-      <li>
-        <span class="ms-dot done"></span>
-        <span><strong>McKibben actuator (prototype)</strong> — handmade from latex tube + braided mesh, inflation tested ✓</span>
-      </li>
-      <li>
-        <span class="ms-dot active"></span>
-        <span><strong>Automatic deflation</strong> — solenoid valve integration, currently in progress</span>
-      </li>
-      <li>
-        <span class="ms-dot next"></span>
-        <span><strong>Lattice shell design</strong> — 3D printed breathable exoskeleton in PLA</span>
-      </li>
-      <li>
-        <span class="ms-dot next"></span>
-        <span><strong>TPU contact surfaces</strong> — soft biocompatible inner lining</span>
-      </li>
-      <li>
-        <span class="ms-dot next"></span>
-        <span><strong>System integration</strong> — all components assembled into wearable form</span>
-      </li>
-      <li>
-        <span class="ms-dot next"></span>
-        <span><strong>User testing</strong> — fit, comfort, and feedback evaluation</span>
-      </li>
-      <li>
-        <span class="ms-dot next"></span>
-        <span><strong>Final presentation</strong> — worn with a red printed tie, naturally</span>
-      </li>
-    </ul> -->
+    <div class="next-steps">
+      <h3>From proof of concept to device</h3>
+      <ul>
+        <li><strong>Portable power</strong> — replace bench supply with a compact 12V battery pack so the brace is untethered</li>
+        <li><strong>Electronics backpack</strong> — 3D print a PLA/TPU hybrid housing: rigid PLA compartments for electronics waterproofing, flexible TPU shell with laser-cut ventilation cuts for breathability</li>
+        <li><strong>Multi-zone inflation</strong> — expand from one solenoid to independent zone control for front and back actuator groups</li>
+        <li><strong>Commercial FSR + actuators</strong> — replace handmade components with calibrated commercial equivalents for consistent pressure readings</li>
+        <li><strong>Sewing refinement</strong> — tighter pocket tolerances, reinforced seams at actuator attachment points, cleaner sleeve construction</li>
+        <li><strong>Clinical feedback</strong> — connect with medical device researchers at Harvard and MIT to validate pressure targets against cervical collar standards</li>
+      </ul>
+    </div>
 
   </section>
 </body>
