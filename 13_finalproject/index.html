@@ -243,6 +243,9 @@
       controls the pump and solenoid valve until the correct
       pressure is reached independently in each zone.
     </p>
+    <img src="../placeholder_assets/Sewing.jpeg"
+         alt="Embrace concept — soft robotics approach">
+    <p class="caption">Sewing Flat Pattern with Electronics Schematic</p>
 
     <div class="two-col">
       <div class="two-col-block">
@@ -289,41 +292,45 @@
     <!--  SYSTEM ARCHITECTURE  -->
     <h2>System Architecture</h2>
 
+     <img src="../placeholder_assets/Components.jpeg"
+         alt="Embrace concept — soft robotics approach", width="600">
+    <p class="caption">Components Required for Electronics</p>
+    
     <div class="system-grid">
       <div class="system-block">
         <p class="sys-tag">Input</p>
         <h3>Velostat FSR</h3>
-        <p>Handmade pressure sensor embedded in spandex fabric — reads contact force at neck interface continuously</p>
+        <p>Handmade pressure sensor embedded in spandex fabric: reads contact force at neck interface continuously</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Controller</p>
         <h3>XIAO ESP32-C3</h3>
-        <p>Maps pressure to fit zones — too loose, good fit, too tight — controls pump and valve independently</p>
+        <p>Maps pressure to fit zones: too loose, good fit, too tight — controls pump and valve independently</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output A</p>
         <h3>Mini Air Pump</h3>
-        <p>Pressurises the system — detachable once the brace reaches target fit</p>
+        <p>Pressurises the system: detachable once the brace reaches target fit</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output B</p>
         <h3>Solenoid Valve</h3>
-        <p>Distributes air to McKibben actuator pockets — controls inflation per zone</p>
+        <p>Distributes air to McKibben actuator pockets: controls inflation per zone</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Actuator</p>
         <h3>McKibben Muscles</h3>
-        <p>Handmade from latex tubing + braided mesh — expand radially under pressure to conform to neck</p>
+        <p>Handmade from latex tubing + braided mesh: expand radially under pressure to conform to neck</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Structure</p>
         <h3>Spandex Shell</h3>
-        <p>Pink spandex sewn with internal pockets and sleeves — houses actuators and FSR in a wearable form</p>
+        <p>Pink spandex sewn with internal pockets and sleeves: houses actuators and FSR in a wearable form</p>
       </div>
     </div>
 
     <!--  MVP -->
-    <h2>MVP — Proof of Concept</h2>
+    <h2>MVP: Proof of Concept</h2>
     <p>
       The MVP demonstrates the core Embrace concept as a
       wearable prototype: a sewn spandex brace with embedded
@@ -336,7 +343,7 @@
     <div class="process-step">
       <p class="step-number">01</p>
       <div class="step-content">
-        <h3>The Brace — Sewn Spandex Shell</h3>
+        <h3>The Brace: Sewn Spandex Shell</h3>
         <p>
           Sewn by hand on a sewing machine — first time
           using one. Pink spandex chosen for its calming
@@ -357,7 +364,7 @@
     <div class="process-step">
       <p class="step-number">02</p>
       <div class="step-content">
-        <h3>The Circuit — Pump + Solenoid + MOSFET</h3>
+        <h3>The Circuit: Pump + Solenoid + MOSFET</h3>
         <p>
           XIAO ESP32-C3 controls a mini air pump and
           solenoid valve via N-channel MOSFETs. The pump
@@ -388,7 +395,7 @@
           <source src="../placeholder_assets/embrace_3.mp4"
                   type="video/mp4">
         </video>
-        <p class="caption">Circuit in operation — pump inflating McKibben actuators via solenoid valve</p>
+        <p class="caption">Circuit in operation: pump inflating McKibben actuators via solenoid valve</p>
       </div>
     </div>
 
@@ -410,7 +417,7 @@
         <h3>Oscilloscope Measurement</h3>
         <p>
           Output signal from the solenoid valve control
-          pin measured on the oscilloscope — confirming
+          pin measured on the oscilloscope, confirming
           the MOSFET switching cleanly between HIGH and
           LOW states in response to FSR pressure readings.
           The waveform shows clean digital switching with
