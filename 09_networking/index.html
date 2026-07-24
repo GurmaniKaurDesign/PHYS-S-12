@@ -1,30 +1,508 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Week 9 · Networking</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p { margin-bottom: 0; font-style: italic; }
+    .team-credit {
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      color: var(--accent-color);
+      letter-spacing: 0.06em;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img,
+    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
+    .sensor-tag {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      margin-right: 0.5rem;
+    }
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--secondary-color);
+      margin: 1.5rem 0;
+    }
+    .system-block {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--secondary-color);
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .system-block .sys-tag {
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+    .system-block h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1rem; }
+    .system-block p { font-size: 0.85rem; margin-bottom: 0; max-width: none; }
+    .failed-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: #f0d0d0;
+      color: #8a1f1f;
+      margin-bottom: 0.75rem;
+    }
+    .success-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: #d8e8d0;
+      color: #2f5a2f;
+      margin-bottom: 0.75rem;
+    }
+    .narrative-box {
+      border: 1px solid var(--secondary-color);
+      border-radius: 4px;
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      font-style: italic;
+    }
+    .narrative-box p { margin-bottom: 0.5rem; max-width: none; }
+    .narrative-box p:last-child { margin-bottom: 0; }
+    .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 1px;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 9: Networking</h1>
+<body>
+  <section class="blog">
 
-      <p>Working with a partner or group of 3, program something that makes use of the radio, Wifi, or bluetooth capabilities of the ESP32. Only one person per group needs to have documentation on their website. Everyone else should provide a link to that person's documentation.</p>
-      
-    </section>
-  </body>
+    <p class="blog-meta">Week 09 · Networking · July 2026</p>
+    <h1>Project Spike</h1>
+    <p class="team-credit">Team: Gurmani · Chloe · Matthew</p>
 
-  <footer>See config.js</footer>
+    <div class="concept-highlight">
+      <p>
+        Spike is a remote-controlled articulated dragon who blows
+        cooling air from his mouth, controlled wirelessly via a
+        custom rotary encoder PCB over ESP-NOW. His eye blinks
+        in sync with the remote — faster when you turn the encoder,
+        off when you click. He wears a pirate patch because we ran
+        out of LEDs. He promotes peace.
+      </p>
+    </div>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <div class="narrative-box">
+      <p>
+        Spike, the pacifist pirate dragon, has voyaged oceans and
+        deep blue skies. He has lost an eye at sea and shed his
+        wings while gaining wisdom along his way.
+      </p>
+      <p>
+        He no longer breathes fire — he blows air onto the beings
+        around him to cool them down in this hot summer and promote
+        peace. And he's remote controlled.
+      </p>
+    </div>
+
+    <!-- ══════════════════════ FINAL RESULT ══════════════════════ -->
+    <h2>Final Result</h2>
+
+    <img src="../placeholder_assets/spike_final.jpg"
+         alt="Project Spike — remote controlled dragon on rock enclosure">
+    <p class="caption">Spike the pacifist pirate dragon — articulated body, rock enclosure, air pump concealed inside</p>
+
+    <div class="img-duo">
+      <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__4_.jpeg"
+           alt="Dragon assembled on rock during presentation">
+      <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_43.jpeg"
+           alt="Dragon head with pirate eye patch">
+    </div>
+    <p class="caption">Left: Spike on his rock at the presentation · Right: the pirate patch in detail</p>
+
+    <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_29_09.jpeg"
+         alt="Team Project Spike — Gurmani, Chloe, Matthew in matching shirts">
+    <p class="caption">Team Project Spike — matching heat-pressed T-shirts, custom vinyl logo</p>
+
+    <!-- ══════════════════════ SYSTEM ══════════════════════ -->
+    <h2>How It Works</h2>
+
+    <div class="system-grid">
+      <div class="system-block">
+        <p class="sys-tag">Remote</p>
+        <h3>Rotary Encoder PCB</h3>
+        <p>Custom milled PCB from Week 8 — XIAO ESP32-C3, clickable encoder, LED. Click to pair, turn to increase blink rate.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Protocol</p>
+        <h3>ESP-NOW</h3>
+        <p>Peer-to-peer radio — no WiFi router needed. REQUEST → ACK → CONTROL messages. ON/OFF and INTENSITY (0–100) for blink rate.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Dragon</p>
+        <h3>XIAO ESP32-C3</h3>
+        <p>Receives control signal, drives fan via custom motor driver (2N3904 transistor + IRFP460 MOSFET), blinks LED eye.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Output</p>
+        <h3>Air Pump + LED Eye</h3>
+        <p>12V fan blows air through dragon mouth. Single LED in one eye blinks in sync with remote. Other eye: pirate patch.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Enclosure</p>
+        <h3>The Rock</h3>
+        <p>Vacuum formed PETG dome over a red wooden ball — filled with real soil, stones and weeds collected outside the Science Centre.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Identity</p>
+        <h3>Project Spike</h3>
+        <p>Team T-shirts: Chloe's logo in Inkscape, vinyl cut, heat pressed. "Spawned in Harvard" — because it was.</p>
+      </div>
+    </div>
+
+    <a class="ext-link" href="https://mattastica.github.io/phys-s-12/09_networking/index.html"
+       target="_blank" rel="noopener">
+      → Matthew's full networking documentation + circuit schematics
+    </a>
+
+    <!-- ══════════════════════ DRAGON MODEL ══════════════════════ -->
+    <h2>Part 1 — The Dragon</h2>
+    <span class="sensor-tag">Gurmani + Chloe · Blender · Maya · SolidWorks · Prusa MK4S</span>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Chloe's Blender Model</h3>
+        <p>
+          Chloe modelled the dragon head in Blender — spiky,
+          characterful, with enough personality to deserve a name.
+          Spike. The spiked crown is what gave the project its
+          identity.
+        </p>
+        <img src="../placeholder_assets/Screenshot_2026-07-22_at_5_40_33_PM.png"
+             alt="Dragon head in SolidWorks — complex mesh wireframe">
+        <p class="caption">Chloe's dragon head — complex mesh imported into SolidWorks</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Failed Attempts — Maya Retopo + SolidWorks Shell</h3>
+        <span class="failed-badge">Both failed</span>
+        <p>
+          I imported the Blender mesh into Maya to retopologise
+          it for cleaner geometry, then into SolidWorks to shell
+          it — creating a hollow body for electronics and airflow.
+          Both failed. The mesh was too complex for SolidWorks to
+          offset the surfaces: 21+ faces selected, still couldn't
+          compute a clean offset at any distance. Maya's retopo
+          tools couldn't handle the spike geometry without
+          destroying the silhouette.
+        </p>
+        <img src="../placeholder_assets/Screenshot_2026-07-22_at_5_43_00_PM.png"
+             alt="SolidWorks error — unable to offset selected surfaces">
+        <p class="caption">SolidWorks offset surface failure — 21 faces selected, still couldn't resolve the complex spike geometry</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Plan B — Print-in-Place Articulated Dragon</h3>
+        <span class="success-badge">This worked</span>
+        <p>
+          Found a print-in-place articulated dragon on MakerWorld
+          that prints without supports and comes out fully jointed.
+          The plan: print the full dragon in orange PLA, remove
+          its existing head, replace with Chloe's Blender head.
+          I set up the gcode in PrusaSlicer — added supports
+          only to the Blender head using the paint-on support
+          regions feature, leaving the articulated body
+          support-free.
+        </p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__6_.jpeg"
+             alt="Prusa MK4S mid-print — dragon body forming">
+        <p class="caption">Prusa MK4S mid-print — articulated body segments forming at 1% complete, 12h 44m remaining</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__5_.jpeg"
+             alt="Fresh print — full dragon on Prusa bed">
+        <p class="caption">Fresh off the Prusa — full articulated dragon with Chloe's head, orange PLA</p>
+
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Project_Spike.STL" download>
+            ↓ Download STL
+          </a>
+          <a class="download-btn" href="../placeholder_assets/Project_Spike.SLDPRT" download>
+            ↓ Download SolidWorks Part
+          </a>
+          <a class="download-btn" href="../placeholder_assets/Project_Spike_Gurmani.bgcode" download>
+            ↓ Download Prusa Gcode
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>Drilling + Electronics Integration</h3>
+        <p>
+          Removed supports from the printed head. Drilled three
+          holes: one from the mouth to the bottom surface (for
+          the air valve tube), and one through each eye converging
+          at the same bottom exit point (for the LED wiring). The
+          LED in the eye blinks in sync with the remote's LED —
+          faster as the rotary encoder turns, off when clicked
+          again.
+        </p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_43.jpeg"
+             alt="Dragon head with LED eye and pirate patch">
+        <p class="caption">LED wired into the eye socket — pirate patch covers the second empty eye</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_44.jpeg"
+             alt="Dragon head underside — wiring exits at bottom">
+        <p class="caption">Underside — all wiring and tubing exits through drilled bottom holes</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ THE ROCK ══════════════════════ -->
+    <h2>Part 2 — The Rock</h2>
+    <span class="sensor-tag">Gurmani · Vacuum forming · PETG · Natural materials</span>
+
+    <p>
+      The pump needed hiding. The solution: build a rock. A real
+      enough looking rock, made from a vacuum formed dome and
+      actual debris collected from outside the Harvard Science
+      Centre.
+    </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Vacuum Forming the Dome</h3>
+        <p>
+          Found a red wooden pendulum ball in the lab. Vacuum
+          formed a PETG dome over it — same process as the PCB
+          cover from Week 8. Cut the dome out, scored the top
+          to create an opening for the dragon body to sit in
+          and wiring to exit.
+        </p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__2_.jpeg"
+               alt="Red wooden ball positive for vacuum forming">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__3_.jpeg"
+               alt="PETG dome after vacuum forming — ball and dome side by side">
+        </div>
+        <p class="caption">Left: red wooden ball positive · Right: PETG dome after forming — ball and cover side by side</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Collecting the "Rock" Materials</h3>
+        <p>
+          Ran outside the Harvard Science Centre — literally — and
+          collected soil, pebbles, stones, and weeds from the
+          ground. Brought them back in a bag and stuck them to
+          the outside of the PETG dome using hot glue to simulate
+          a mossy rock surface.
+        </p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__1_.jpeg"
+               alt="Bag of collected soil, stones and plants from outside Science Centre">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11.jpeg"
+               alt="Finished rock — PETG dome covered in soil and succulents">
+        </div>
+        <p class="caption">Left: collected materials from outside Harvard Science Centre · Right: finished rock enclosure</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Assembly — Dragon on Rock</h3>
+        <p>
+          Pump hidden inside the dome. Air tube routed through
+          the rock surface, up through the dragon body, through
+          the drilled mouth hole. Small pieces of light plastic
+          cut and placed in front of the mouth — they flutter
+          when the air blows. The dragon's articulated body
+          drapes naturally over the rock.
+        </p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23.jpeg"
+               alt="Dragon assembled on rock — full view">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23__1_.jpeg"
+               alt="Dragon being assembled — presentation setup">
+        </div>
+        <p class="caption">Spike assembled on his rock — pump concealed, tube routed through body to mouth</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23__2_.jpeg"
+             alt="Professor examining Project Spike at presentation">
+        <p class="caption">Presentation moment — Nathan examining Spike up close</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ T-SHIRTS ══════════════════════ -->
+    <h2>Part 3 — The Brand</h2>
+    <span class="sensor-tag">Chloe + Gurmani · Inkscape · Vinyl cutter · Heat press</span>
+
+    <p>
+      If you're going to present a remote-controlled pirate dragon
+      at Harvard, you should probably wear matching shirts.
+    </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Logo Design + Vinyl Cutting</h3>
+        <p>
+          Chloe designed the Project Spike logo in Inkscape —
+          the dragon silhouette against a red sun with yellow
+          rays, "PROJECT SPIKE — Spawned in Harvard" tagline.
+          Vinyl cut in multiple layers: yellow for the sun rays,
+          red for the circle, navy for the dragon and text.
+          "Spawned in Harvard" was cut separately as a text strip.
+        </p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_22_13.jpeg"
+               alt="Vinyl cut sticker sheets laid out — multiple colour layers">
+          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__6_.jpeg"
+               alt="Spawned in Harvard vinyl text cut — before and after weeding">
+        </div>
+        <p class="caption">Left: vinyl layers laid out for assembly · Right: "Spawned in Harvard" cut and weeded</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Heat Press</h3>
+        <p>
+          Watched tutorials, assembled the layered vinyl on the
+          shirts, heat pressed using the lab's heat press machine.
+          Three shirts, one press each. The 3D printed dragon
+          silhouette from SolidWorks ended up embedded in the
+          logo — printed flat and pressed directly onto the fabric
+          as a raised element on top of the vinyl.
+        </p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__3_.jpeg"
+             alt="Heat pressing the Project Spike logo onto shirts">
+        <p class="caption">Heat press in action — watching tutorials while doing it, as one does</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_44__1_.jpeg"
+             alt="Final T-shirt — Project Spike logo heat pressed on chest">
+        <p class="caption">Final result — "Project Spike · Spawned in Harvard"</p>
+      </div>
+    </div>
+
+    <!-- ══════════════════════ TEAM ══════════════════════ -->
+    <h2>The Team</h2>
+
+    <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_29_09.jpeg"
+         alt="Team Project Spike — Gurmani, Chloe and Matthew in matching shirts">
+    <p class="caption">Team Spike — matching shirts, one dragon, one remote, zero regrets</p>
+
+    <p>
+      Matthew handled all the electronics and ESP-NOW networking —
+      full documentation on his site including circuit schematics
+      and the motor driver design.
+    </p>
+    <a class="ext-link" href="https://mattastica.github.io/phys-s-12/09_networking/index.html"
+       target="_blank" rel="noopener">
+      → Matthew's networking documentation
+    </a>
+    <br>
+    <a class="ext-link" href="https://github.com/mattastica/remote-control-dragon"
+       target="_blank" rel="noopener" style="margin-top:0.5rem;">
+      → Remote Control Dragon — GitHub repo
+    </a>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
