@@ -162,84 +162,84 @@
 
     <p class="blog-meta">Week 09 · Networking · July 2026</p>
     <h1>Project Spike</h1>
-    <p class="team-credit">Team: Gurmani · Chloe · Matthew</p>
+    <p class="team-credit">Team: Chloe · Gurmani · Matthew</p>
 
     <div class="concept-highlight">
+            <p>
+        Spike, the pacifist pirate dragon, has sailed oceans and
+        soared through deep blue skies. Somewhere along the way
+        he lost an eye, shed his wings, and gained a little
+        wisdom.
+      </p>
       <p>
-        Spike is a remote-controlled articulated dragon who blows
-        cooling air from his mouth, controlled wirelessly via a
-        custom rotary encoder PCB over ESP-NOW. His eye blinks
-        in sync with the remote — faster when you turn the encoder,
-        off when you click. He wears a pirate patch because we ran
-        out of LEDs. He promotes peace.
+        He no longer breathes fire — these days he blows cool air
+        on everyone around him, doing his small part for peace in
+        a hot summer. And yes, he's remote controlled.
       </p>
     </div>
 
     <div class="narrative-box">
       <p>
-        Spike, the pacifist pirate dragon, has voyaged oceans and
-        deep blue skies. He has lost an eye at sea and shed his
-        wings while gaining wisdom along his way.
-      </p>
-      <p>
-        He no longer breathes fire — he blows air onto the beings
-        around him to cool them down in this hot summer and promote
-        peace. And he's remote controlled.
+        Spike is a remote-controlled articulated dragon that blows
+        cooling air from his mouth, driven wirelessly by a custom
+        rotary encoder PCB over ESP-NOW. His eye blinks in sync
+        with the remote, faster as you turn the encoder, off
+        when you click it. Bearing his pirate patch, he promotes peace.
       </p>
     </div>
 
-    <!-- ══════════════════════ FINAL RESULT ══════════════════════ -->
+    <!--FINAL RESULT \-->
     <h2>Final Result</h2>
 
-    <img src="../placeholder_assets/spike_final.jpg"
-         alt="Project Spike — remote controlled dragon on rock enclosure">
+    <img src="../placeholder_assets/spike_final.jpeg"
+         alt="Project Spike — remote controlled dragon on rock enclosure", width="400">
     <p class="caption">Spike the pacifist pirate dragon — articulated body, rock enclosure, air pump concealed inside</p>
 
     <div class="img-duo">
-      <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__4_.jpeg"
-           alt="Dragon assembled on rock during presentation">
-      <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_43.jpeg"
-           alt="Dragon head with pirate eye patch">
+      <img src="../placeholder_assets/Spike_Tshirt.jpeg"
+           alt="Spike logo on T-shirt", width="400">
+      <img src="../placeholder_assets/Spike_pose.jpeg"
+           alt="Spike-a-pose! (shoutout to Devil wears Prada;)", width="400">
     </div>
-    <p class="caption">Left: Spike on his rock at the presentation · Right: the pirate patch in detail</p>
+    <p class="caption">Left: Spike on his rock at the presentation · Right: A bust of Spike, the pirate dragon</p>
 
-    <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_29_09.jpeg"
+    <img src="../placeholder_assets/Team_Spike.jpeg"
          alt="Team Project Spike — Gurmani, Chloe, Matthew in matching shirts">
     <p class="caption">Team Project Spike — matching heat-pressed T-shirts, custom vinyl logo</p>
 
-    <!-- ══════════════════════ SYSTEM ══════════════════════ -->
+    <!-- SYSTEM -->
     <h2>How It Works</h2>
 
     <div class="system-grid">
       <div class="system-block">
         <p class="sys-tag">Remote</p>
         <h3>Rotary Encoder PCB</h3>
-        <p>Custom milled PCB from Week 8 — XIAO ESP32-C3, clickable encoder, LED. Click to pair, turn to increase blink rate.</p>
+        <p>A custom-milled PCB from Week 8: XIAO ESP32-C3, a clickable rotary encoder, and an LED. Click to pair, turn to change the blink rate.</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Protocol</p>
         <h3>ESP-NOW</h3>
-        <p>Peer-to-peer radio — no WiFi router needed. REQUEST → ACK → CONTROL messages. ON/OFF and INTENSITY (0–100) for blink rate.</p>
+        <p>Peer-to-peer radio communication, no Wi-Fi router required. Messages flow REQUEST → ACK → CONTROL, carrying an ON/OFF state and an INTENSITY value (0–100) for the blink rate.</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Dragon</p>
         <h3>XIAO ESP32-C3</h3>
-        <p>Receives control signal, drives fan via custom motor driver (2N3904 transistor + IRFP460 MOSFET), blinks LED eye.</p>
+        <p>Receives the control signal, drives the fan through a custom motor driver (2N3904 transistor + IRFP460 MOSFET), and blinks the LED eye accordingly.</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output</p>
         <h3>Air Pump + LED Eye</h3>
-        <p>12V fan blows air through dragon mouth. Single LED in one eye blinks in sync with remote. Other eye: pirate patch.</p>
+        <p>A 12V fan pushes air through the dragon's mouth, and a single LED in one eye blinks in sync with the remote. The other eye: a pirate patch.</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Enclosure</p>
         <h3>The Rock</h3>
-        <p>Vacuum formed PETG dome over a red wooden ball — filled with real soil, stones and weeds collected outside the Science Centre.</p>
+        <p>A vacuum-formed PETG dome over a red wooden ball, dressed with real soil, stones, and weeds collected outside the Science Center.</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Identity</p>
         <h3>Project Spike</h3>
-        <p>Team T-shirts: Chloe's logo in Inkscape, vinyl cut, heat pressed. "Spawned in Harvard" — because it was.</p>
+        <p>Team T-shirts featuring Chloe's logo, designed in Inkscape, vinyl cut, and heat pressed. "Spawned in Harvard" — because it was.</p>
       </div>
     </div>
 
@@ -248,8 +248,8 @@
       → Matthew's full networking documentation + circuit schematics
     </a>
 
-    <!-- ══════════════════════ DRAGON MODEL ══════════════════════ -->
-    <h2>Part 1 — The Dragon</h2>
+    <!-- DRAGON MODEL -->
+    <h2>Part 1: The Dragon</h2>
     <span class="sensor-tag">Gurmani + Chloe · Blender · Maya · SolidWorks · Prusa MK4S</span>
 
     <div class="process-step">
@@ -257,35 +257,42 @@
       <div class="step-content">
         <h3>Chloe's Blender Model</h3>
         <p>
-          Chloe modelled the dragon head in Blender — spiky,
-          characterful, with enough personality to deserve a name.
-          Spike. The spiked crown is what gave the project its
+          Chloe modeled the dragon head in Blender — spiky and
+          characterful enough to deserve a name of its own: Spike.
+          That spiked crown is what gave the whole project its
           identity.
         </p>
-        <img src="../placeholder_assets/Screenshot_2026-07-22_at_5_40_33_PM.png"
-             alt="Dragon head in SolidWorks — complex mesh wireframe">
-        <p class="caption">Chloe's dragon head — complex mesh imported into SolidWorks</p>
+        <img src="../placeholder_assets/Spike_Solidworks.png"
+             alt="Dragon head in SolidWorks — complex mesh wireframe", width="300">
+        <p class="caption">Chloe's dragon head — complex mesh I imported into SolidWorks</p>
       </div>
     </div>
 
     <div class="process-step">
       <p class="step-number">02</p>
       <div class="step-content">
-        <h3>Failed Attempts — Maya Retopo + SolidWorks Shell</h3>
-        <span class="failed-badge">Both failed</span>
+        <h3>Iteration — Maya Retopo + SolidWorks Shell</h3>
+        <span class="failed-badge">Pivoted</span>
         <p>
-          I imported the Blender mesh into Maya to retopologise
-          it for cleaner geometry, then into SolidWorks to shell
-          it — creating a hollow body for electronics and airflow.
-          Both failed. The mesh was too complex for SolidWorks to
-          offset the surfaces: 21+ faces selected, still couldn't
-          compute a clean offset at any distance. Maya's retopo
-          tools couldn't handle the spike geometry without
-          destroying the silhouette.
+          I imported the Blender mesh into Maya to retopologize
+          it for cleaner geometry, then brought it into SolidWorks
+          to shell it into a hollow body for the electronics and
+          airflow. Neither step got me there. SolidWorks couldn't
+          resolve a clean offset at any distance, even with 21+
+          faces selected for the shell — the mesh was simply too
+          complex. Maya's retopology tools hit the same wall: they
+          couldn't simplify the spike geometry without destroying
+          the silhouette that made the design distinct. Time to
+          try a different approach.
         </p>
-        <img src="../placeholder_assets/Screenshot_2026-07-22_at_5_43_00_PM.png"
+        <img src="../placeholder_assets/Spike_Solidworks_Error.png"
              alt="SolidWorks error — unable to offset selected surfaces">
-        <p class="caption">SolidWorks offset surface failure — 21 faces selected, still couldn't resolve the complex spike geometry</p>
+        <p class="caption">SolidWorks offset attempt — all faces selected, still couldn't resolve the complex spike geometry</p>
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/Spike_Solidworks_Error.mp4"
+                  type="video/mp4">
+        </video>
+        <p class="caption">Computer hanged and software crashed multiple times</p>
       </div>
     </div>
 
@@ -296,20 +303,25 @@
         <span class="success-badge">This worked</span>
         <p>
           Found a print-in-place articulated dragon on MakerWorld
-          that prints without supports and comes out fully jointed.
-          The plan: print the full dragon in orange PLA, remove
-          its existing head, replace with Chloe's Blender head.
-          I set up the gcode in PrusaSlicer — added supports
-          only to the Blender head using the paint-on support
-          regions feature, leaving the articulated body
-          support-free.
+          that prints fully jointed with no supports needed. The
+          new plan: print the whole body in orange PLA, remove
+          the stock head, and swap in Chloe's Blender head. I set
+          up the G-code in PrusaSlicer, using the paint-on support
+          feature to add supports only where the new head needed
+          them, keeping the articulated body support-free.
         </p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__6_.jpeg"
-             alt="Prusa MK4S mid-print — dragon body forming">
+        <img src="../placeholder_assets/Spike_printing.jpeg"
+             alt="Prusa MK4S mid-print — dragon body forming" width="300">
         <p class="caption">Prusa MK4S mid-print — articulated body segments forming at 1% complete, 12h 44m remaining</p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__5_.jpeg"
-             alt="Fresh print — full dragon on Prusa bed">
+        <img src="../placeholder_assets/Spike_printed.jpeg"
+             alt="Fresh print — full dragon on Prusa bed" width="300">
         <p class="caption">Fresh off the Prusa — full articulated dragon with Chloe's head, orange PLA</p>
+        
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/Spike_Supports.mp4"
+                  type="video/mp4">
+        </video>
+        <p class="caption">Removing the supports off of the printed dragon head</p>
 
         <div class="download-row">
           <a class="download-btn" href="../placeholder_assets/Project_Spike.STL" download>
@@ -330,32 +342,31 @@
       <div class="step-content">
         <h3>Drilling + Electronics Integration</h3>
         <p>
-          Removed supports from the printed head. Drilled three
-          holes: one from the mouth to the bottom surface (for
-          the air valve tube), and one through each eye converging
-          at the same bottom exit point (for the LED wiring). The
-          LED in the eye blinks in sync with the remote's LED —
-          faster as the rotary encoder turns, off when clicked
-          again.
+          Removed the supports from the printed head, then drilled
+          three holes: one running from the mouth to the underside
+          (for the air tube), and one through each eye, both
+          converging at the same exit point on the underside (for
+          the LED wiring). The eye LED blinks in sync with the
+          remote — faster as the rotary encoder turns, off when
+          it's clicked again.
         </p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_43.jpeg"
-             alt="Dragon head with LED eye and pirate patch">
+        <img src="../placeholder_assets/Spike_head.jpeg"
+             alt="Dragon head with LED eye and pirate patch" width="300">
         <p class="caption">LED wired into the eye socket — pirate patch covers the second empty eye</p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_44.jpeg"
-             alt="Dragon head underside — wiring exits at bottom">
+        <img src="../placeholder_assets/Spike_remote.jpeg"
+             alt="Dragon head underside: wiring exits at bottom" width="300">
         <p class="caption">Underside — all wiring and tubing exits through drilled bottom holes</p>
       </div>
     </div>
 
-    <!-- ══════════════════════ THE ROCK ══════════════════════ -->
-    <h2>Part 2 — The Rock</h2>
+    <!-- THE ROCK -->
+    <h2>Part 2: The Rock</h2>
     <span class="sensor-tag">Gurmani · Vacuum forming · PETG · Natural materials</span>
 
     <p>
-      The pump needed hiding. The solution: build a rock. A real
-      enough looking rock, made from a vacuum formed dome and
-      actual debris collected from outside the Harvard Science
-      Centre.
+      The pump needed somewhere to hide. The solution: build a
+      rock — a convincing one, made from a vacuum-formed dome and
+      real debris collected outside the Harvard Science Center.
     </p>
 
     <div class="process-step">
@@ -363,16 +374,16 @@
       <div class="step-content">
         <h3>Vacuum Forming the Dome</h3>
         <p>
-          Found a red wooden pendulum ball in the lab. Vacuum
-          formed a PETG dome over it — same process as the PCB
-          cover from Week 8. Cut the dome out, scored the top
-          to create an opening for the dragon body to sit in
-          and wiring to exit.
+          Found a red wooden pendulum ball in the lab and
+          vacuum-formed a PETG dome over it, using the same
+          process as the Week 8 PCB cover. Cut the dome free and
+          scored an opening at the top for the dragon's body to
+          sit in, with room for the wiring to exit.
         </p>
         <div class="img-duo">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__2_.jpeg"
+          <img src="../placeholder_assets/Vaccum_ball.jpeg"
                alt="Red wooden ball positive for vacuum forming">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__3_.jpeg"
+          <img src="../placeholder_assets/Red_ball.jpeg"
                alt="PETG dome after vacuum forming — ball and dome side by side">
         </div>
         <p class="caption">Left: red wooden ball positive · Right: PETG dome after forming — ball and cover side by side</p>
@@ -384,16 +395,15 @@
       <div class="step-content">
         <h3>Collecting the "Rock" Materials</h3>
         <p>
-          Ran outside the Harvard Science Centre — literally — and
-          collected soil, pebbles, stones, and weeds from the
-          ground. Brought them back in a bag and stuck them to
-          the outside of the PETG dome using hot glue to simulate
-          a mossy rock surface.
+          Ran outside the Harvard Science Center — literally —
+          and collected soil, pebbles, stones, and weeds. Brought
+          it all back in a bag and hot-glued it to the outside of
+          the PETG dome to build up a mossy rock surface.
         </p>
         <div class="img-duo">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__1_.jpeg"
+          <img src="../placeholder_assets/Soil_rock.jpeg"
                alt="Bag of collected soil, stones and plants from outside Science Centre">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11.jpeg"
+          <img src="../placeholder_assets/rock.jpeg"
                alt="Finished rock — PETG dome covered in soil and succulents">
         </div>
         <p class="caption">Left: collected materials from outside Harvard Science Centre · Right: finished rock enclosure</p>
@@ -405,28 +415,21 @@
       <div class="step-content">
         <h3>Assembly — Dragon on Rock</h3>
         <p>
-          Pump hidden inside the dome. Air tube routed through
-          the rock surface, up through the dragon body, through
-          the drilled mouth hole. Small pieces of light plastic
-          cut and placed in front of the mouth — they flutter
-          when the air blows. The dragon's articulated body
-          drapes naturally over the rock.
+          With the pump hidden inside the dome, the air tube
+          routes through the rock surface, up through the
+          dragon's body, and out through the drilled mouth hole.
+          Small pieces of light plastic sit in front of the mouth
+          and flutter when the air blows. The dragon's articulated
+          body drapes naturally over the rock.
         </p>
-        <div class="img-duo">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23.jpeg"
-               alt="Dragon assembled on rock — full view">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23__1_.jpeg"
-               alt="Dragon being assembled — presentation setup">
-        </div>
-        <p class="caption">Spike assembled on his rock — pump concealed, tube routed through body to mouth</p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_08_23__2_.jpeg"
-             alt="Professor examining Project Spike at presentation">
-        <p class="caption">Presentation moment — Nathan examining Spike up close</p>
+      <img src="../placeholder_assets/assembly.jpeg"
+               alt="Preparation for final assembly: dragon body on rock enclosure" width="400">
+        <p class="caption">Preparation for final assembly: dragon body on rock enclosure</p>
       </div>
     </div>
 
-    <!-- ══════════════════════ T-SHIRTS ══════════════════════ -->
-    <h2>Part 3 — The Brand</h2>
+    <!--T-SHIRTS -->
+    <h2>Part 3: The Brand</h2>
     <span class="sensor-tag">Chloe + Gurmani · Inkscape · Vinyl cutter · Heat press</span>
 
     <p>
@@ -439,17 +442,18 @@
       <div class="step-content">
         <h3>Logo Design + Vinyl Cutting</h3>
         <p>
-          Chloe designed the Project Spike logo in Inkscape —
-          the dragon silhouette against a red sun with yellow
-          rays, "PROJECT SPIKE — Spawned in Harvard" tagline.
-          Vinyl cut in multiple layers: yellow for the sun rays,
-          red for the circle, navy for the dragon and text.
-          "Spawned in Harvard" was cut separately as a text strip.
+          Chloe designed the Project Spike logo in Inkscape: the
+          dragon silhouette set against a red sun with yellow
+          rays, under the tagline "PROJECT SPIKE — Spawned in
+          Harvard." It was vinyl cut in multiple layers — yellow
+          for the sun rays, red for the circle, navy for the
+          dragon and text — with "Spawned in Harvard" cut
+          separately as its own text strip.
         </p>
         <div class="img-duo">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_22_13.jpeg"
+          <img src="../placeholder_assets/Vinyl_cut.jpeg"
                alt="Vinyl cut sticker sheets laid out — multiple colour layers">
-          <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__6_.jpeg"
+          <img src="../placeholder_assets/Vinyl_text.jpeg"
                alt="Spawned in Harvard vinyl text cut — before and after weeding">
         </div>
         <p class="caption">Left: vinyl layers laid out for assembly · Right: "Spawned in Harvard" cut and weeded</p>
@@ -461,32 +465,38 @@
       <div class="step-content">
         <h3>Heat Press</h3>
         <p>
-          Watched tutorials, assembled the layered vinyl on the
-          shirts, heat pressed using the lab's heat press machine.
-          Three shirts, one press each. The 3D printed dragon
-          silhouette from SolidWorks ended up embedded in the
-          logo — printed flat and pressed directly onto the fabric
-          as a raised element on top of the vinyl.
+          Watched a few tutorials, assembled the layered vinyl on
+          the shirts, and heat pressed each one on the lab's
+          machine — three shirts, one press each. The 3D printed
+          dragon silhouette from SolidWorks ended up embedded in
+          the logo too, printed flat and pressed directly onto
+          the fabric as a raised element on top of the vinyl.
         </p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_20_11__3_.jpeg"
+        <img src="../placeholder_assets/Heat_press.jpeg"
              alt="Heat pressing the Project Spike logo onto shirts">
         <p class="caption">Heat press in action — watching tutorials while doing it, as one does</p>
-        <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_10_44__1_.jpeg"
+        <img src="../placeholder_assets/Final_shirt.jpeg"
              alt="Final T-shirt — Project Spike logo heat pressed on chest">
         <p class="caption">Final result — "Project Spike · Spawned in Harvard"</p>
       </div>
     </div>
 
-    <!-- ══════════════════════ TEAM ══════════════════════ -->
+    <!-- TEAM  -->
     <h2>The Team</h2>
 
-    <img src="../placeholder_assets/WhatsApp_Image_2026-07-24_at_02_29_09.jpeg"
-         alt="Team Project Spike — Gurmani, Chloe and Matthew in matching shirts">
-    <p class="caption">Team Spike — matching shirts, one dragon, one remote, zero regrets</p>
+    <img src="../placeholder_assets/Team.jpeg"
+         alt="Team Project Spike — Gurmani, Chloe and Matthew candid in matching shirts">
+    <p class="caption">Candid photo of Team Spike — matching shirts, one dragon, one remote, zero regrets</p>
+
+    <video controls muted loop playsinline>
+      <source src="../placeholder_assets/Spike_Transition.mp4"
+                  type="video/mp4">
+    </video>
+    <p class="caption">Of course I made a transition video</p>
 
     <p>
       Matthew handled all the electronics and ESP-NOW networking —
-      full documentation on his site including circuit schematics
+      full documentation on his site, including circuit schematics
       and the motor driver design.
     </p>
     <a class="ext-link" href="https://mattastica.github.io/phys-s-12/09_networking/index.html"
@@ -498,6 +508,14 @@
        target="_blank" rel="noopener" style="margin-top:0.5rem;">
       → Remote Control Dragon — GitHub repo
     </a>
+
+    <img src="../placeholder_assets/Circuit_Diagram.jpeg"
+         alt="Circuit Diagram for the ESP-NOW Networking Setup">
+    <p class="caption">Circuit Diagram for the ESP-NOW Networking Setup</p>
+
+        <img src="../placeholder_assets/Circuit.jpeg"
+         alt="Circuit for the ESP-NOW Networking Setup">
+    <p class="caption">Circuit for the ESP-NOW Networking Setup</p>
 
   </section>
 </body>
