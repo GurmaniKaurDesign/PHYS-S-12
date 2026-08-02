@@ -1,29 +1,623 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <title>See config.js</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="../style.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Machine Building · Chalkbot</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .concept-highlight {
+      border-left: 2px solid var(--accent-color);
+      padding: 1.5rem 2rem;
+      margin: 2rem 0;
+      background-color: var(--secondary-color);
+      border-radius: 0 4px 4px 0;
+    }
+    .concept-highlight p { margin-bottom: 0; font-style: italic; }
+    .team-credit {
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      color: var(--accent-color);
+      letter-spacing: 0.06em;
+      margin: 0.5rem 0 1.5rem;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 40px 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+      align-items: start;
+    }
+    .step-number {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      color: var(--accent-color);
+      letter-spacing: 0.1em;
+      padding-top: 0.2rem;
+    }
+    .step-content h3 { margin-top: 0; margin-bottom: 0.5rem; }
+    .step-content p { margin-bottom: 0.75rem; max-width: none; }
+    .step-content img,
+    .step-content video { width: 100%; border-radius: 4px; margin-top: 1rem; }
+    .sensor-tag {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      background: var(--secondary-color);
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+      margin-right: 0.5rem;
+    }
+    .system-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1px;
+      border: 1px solid var(--secondary-color);
+      margin: 1.5rem 0;
+    }
+    .system-block {
+      padding: 1.25rem 1.5rem;
+      border-right: 1px solid var(--secondary-color);
+      border-bottom: 1px solid var(--secondary-color);
+    }
+    .system-block .sys-tag {
+      font-family: var(--mono-font-family);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+    .system-block h3 { margin-top: 0; margin-bottom: 0.4rem; font-size: 1rem; }
+    .system-block p { font-size: 0.85rem; margin-bottom: 0; max-width: none; }
+    .pivot-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: #f0d0d0;
+      color: #8a1f1f;
+      margin-bottom: 0.75rem;
+    }
+    .success-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: #d8e8d0;
+      color: #2f5a2f;
+      margin-bottom: 0.75rem;
+    }
+    .award-badge {
+      display: inline-block;
+      font-family: var(--mono-font-family);
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.55rem;
+      border-radius: 2px;
+      background: #f5e6b8;
+      color: #7a5c00;
+      margin-bottom: 0.75rem;
+    }
+    .ext-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-color);
+      padding-bottom: 1px;
+      margin-top: 0.5rem;
+      display: inline-block;
+    }
+    .download-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 1.5rem 0;
+    }
+    .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--text-color);
+      border-radius: 2px;
+      text-decoration: none;
+      font-family: var(--mono-font-family);
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      color: var(--text-color);
+      transition: background-color 0.15s ease, color 0.15s ease;
+    }
+    .download-btn:hover {
+      background-color: var(--text-color);
+      color: var(--background-color);
+    }
+    table.spec-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      font-size: 0.9rem;
+    }
+    table.spec-table th, table.spec-table td {
+      border: 1px solid var(--secondary-color);
+      padding: 0.6rem 0.9rem;
+      text-align: left;
+    }
+    table.spec-table th {
+      font-family: var(--mono-font-family);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-color);
+    }
+    pre.code-block {
+      background: var(--secondary-color);
+      padding: 1.25rem 1.5rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: var(--mono-font-family);
+      font-size: 0.8rem;
+      line-height: 1.5;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 768px) {
+      .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+    }
+  </style>
+</head>
 
-  <nav>
-    <a id="home" href="../index.html">Home</a>
-    <a href="../index.html#final-project">Work</a>
-    <a href="../about.html">About</a>
-  </nav>
+<nav>
+  <a id="home" href="../index.html">Guru.</a>
+  <a href="../about.html">About</a>
+  <a href="../index.html#work">Work</a>
+</nav>
 
-  <body>
-    <section class="blog">
-      <h1>Week 10: Maching Building</h1>
-      
-      <p>Document your machine, see the PS70 website for more details. Only one person needs to have documentation on their website.</p>
-    </section>
-  </body>
+<body>
+  <section class="blog">
 
-  <footer>See config.js</footer>
+    <p class="blog-meta">Week 10 · Machine Building · July 2026</p>
+    <h1>Chalkbot</h1>
+    <p class="team-credit">Team: Arden · Gurmani · Matthew · Mert · Omer</p>
 
-  <script src="../config.js"></script>
-  <script src="../slideshow.js"></script>
+    <div class="concept-highlight">
+      <p>
+        Chalkbot is a gesture-controlled drawing machine that mounts
+        magnetically to a standard chalkboard, turning it into a
+        low-cost, retrofittable drawing surface.
+      </p>
+      <p>
+        The assignment: assemble and code a drawing machine built
+        around a shared mechanical template, then design a custom
+        end effector and control scheme. Ours draws in chalk, and
+        you drive it with your hand.
+      </p>
+    </div>
+
+    <!-- FINAL RESULT -->
+    <h2>Final Result</h2>
+    <span class="award-badge">Student's Choice Award</span>
+    <p>
+      Chalkbot won the Student's Choice Award for
+      <strong>Most Novel End-Effector / Drawing Technique</strong> —
+      recognition for turning a shared machine template into a
+      working, gesture-driven chalkboard artist.
+    </p>
+    <video controls src="../placeholder_assets/WhatsApp_Video_2026-07-30_at_19_20_03.mp4"></video>
+    <p class="caption">The award announcement — Chalkbot takes Most Novel End-Effector / Drawing Technique</p>
+
+    <!-- SYSTEM -->
+    <h2>How It Works</h2>
+
+    <div class="system-grid">
+      <div class="system-block">
+        <p class="sys-tag">Mount</p>
+        <h3>Magnetic Frame Mount</h3>
+        <p>The machine template is held directly to a standard chalkboard with magnets, rather than a self-driving vehicle — the solution that came out of our first, more torque-hungry approach.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Drive</p>
+        <h3>2-Motor XY Template</h3>
+        <p>Two stepper motors drive the machine template's X and Y axes. We started with a custom-built magnetic vehicle, then adopted the class-provided template for reliability.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">End Effector</p>
+        <h3>Chalk Holder + Rack & Pinion</h3>
+        <p>A spring-loaded chalk holder keeps constant pressure on the board, mounted at an angle to reduce drag, driven by an adapted rack-and-pinion mechanism.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Remote</p>
+        <h3>Gesture Controller</h3>
+        <p>A handheld remote built around an MPU6050 gyroscope/accelerometer, with a trigger for draw mode and a top button to switch modes.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Link</p>
+        <h3>Remote → Machine</h3>
+        <p>The remote talks to the machine over ESP-NOW, sending gesture and button state wirelessly with no router required.</p>
+      </div>
+      <div class="system-block">
+        <p class="sys-tag">Identity</p>
+        <h3>Chalkbot</h3>
+        <p>A gesture-controlled, chalkboard-mounted drawing machine — built as a low-cost, retrofittable upgrade to the traditional classroom chalkboard.</p>
+      </div>
+    </div>
+
+    <!-- WHY CHALKBOT -->
+    <h2>Why Chalkbot</h2>
+    <p>
+      Chalkbot retrofits onto any existing chalkboard rather than
+      replacing it, keeping the cost and installation barrier low
+      compared to a dedicated smartboard. It preserves the tactile,
+      analog feel of chalk while adding a digital, gesture-based
+      input layer on top of it — and because the mount is magnetic,
+      it can move from board to board without any permanent
+      hardware left behind.
+    </p>
+
+    <!-- PART 1 -->
+    <h2>Part 1: Exploration & Approach</h2>
+    <span class="sensor-tag">Full Team · Chalkboard sketches · Prototyping</span>
+
+    <p>
+      Our assignment: build something that uses two stepper motors
+      to move along two dimensions, with an end effector of our
+      choice. We were drawn to a vertical plotter.
+    </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Learning From a Failed V-Plotter</h3>
+        <p>
+          Before building anything, we analyzed a previous semester's
+          failed attempt at a vertical plotter for a glass surface
+          with a marker end effector. Two issues stood out: the
+          4-stepper-motor string-based mechanism, and an end effector
+          without enough Z-axis force or rigidity to hold the marker
+          steady — the result was a machine that couldn't even draw
+          a circle.
+        </p>
+        <img src="../placeholder_assets/failed-vplotter-from-ps70.jpeg"
+             alt="Chalkboard notes analyzing last semester's failed V-plotter">
+        <p class="caption">Mapping out why last semester's V-plotter didn't work — string mechanism, marker rigidity</p>
+        <a class="ext-link" href="https://davidettel.com/PS70/week10.html" target="_blank" rel="noopener">
+          → PS70 Week 10 — Failed V-Plotter for PS70 '26
+        </a>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>Comparing Approaches</h3>
+        <p>
+          We laid out three mounting approaches for a chalkboard
+          V-plotter, each with a magnet-based mount:
+        </p>
+        <table class="spec-table">
+          <tr><th>Approach</th><th>Pros</th><th>Cons</th></tr>
+          <tr>
+            <td>A) 2-motor, rope-based X/Y</td>
+            <td>Easier to build, lighter → easier to mount</td>
+            <td>Harder to program</td>
+          </tr>
+          <tr>
+            <td>B) 2-motor, frame-based X/Y</td>
+            <td>Easier to program</td>
+            <td>Harder to build, heavier → likely harder to mount</td>
+          </tr>
+          <tr>
+            <td>C) 2-wheel magnetic vehicle X/Y</td>
+            <td>Easy to build, easy to program</td>
+            <td>Complex to design</td>
+          </tr>
+        </table>
+        <img src="../placeholder_assets/vplotter-approaches.jpeg"
+             alt="Chalkboard comparing rope-based, frame-based, and wheel-based approaches">
+        <p class="caption">Weighing rope-based, frame-based, and wheel-based mounting approaches</p>
+        <p>
+          We tested mounting options for each: the frame-based
+          approach came in around 3 kg with a promising single-magnet
+          chalk-mount test; the wheel-based approach was lighter at
+          1.6 kg and also held well in a magnet test. That pointed us
+          toward Approach C — a 2-wheel magnetic vehicle.
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>First Attempt — The Magnetic Vehicle</h3>
+        <span class="pivot-badge">Pivoted</span>
+        <p>
+          We found an existing 2-stepper-motor, wheel-and-ball-bearing
+          chassis and protoboard from a past lab project and adapted
+          it — mounting it to the blackboard by adding magnets at a
+          distance. It worked, but needed far more torque than we'd
+          budgeted for to actually move around reliably. Too
+          ambitious for the timeline, so we pivoted to the
+          class-provided machine template instead.
+        </p>
+        <img src="../placeholder_assets/drill-magnet-rig.jpeg"
+             alt="Assembling the recycled vehicle chassis with magnet mount">
+        <p class="caption">Adapting a recycled lab chassis into a magnetically-mounted vehicle</p>
+        <table class="spec-table">
+          <tr><th>Pin</th><th>Left Wheel</th><th>Right Wheel</th></tr>
+          <tr><td>Step</td><td>D4</td><td>D9</td></tr>
+          <tr><td>Direction</td><td>D5</td><td>D7</td></tr>
+        </table>
+        <p class="caption">Pin configuration for the early magnetic vehicle prototype</p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">04</p>
+      <div class="step-content">
+        <h3>The Pivot — Machine Template</h3>
+        <span class="success-badge">This worked</span>
+        <p>
+          We switched to the machine template provided for the
+          assignment and mounted it to the blackboard magnetically —
+          the approach that made it into the final build.
+        </p>
+      </div>
+    </div>
+
+    <!-- PART 2 -->
+    <h2>Part 2: Design Engineering</h2>
+    <span class="sensor-tag">Design & Fabrication · SolidWorks · Prusa MK4S</span>
+
+    <p>
+      Alongside the mechanical build, the team handled the CAD
+      modeling for every supporting component — covers, housings,
+      and the end effector's mounting hardware.
+    </p>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Telescopic Axis Cover</h3>
+        <p>
+          Four styles were iterated before landing on a version that
+          telescopes cleanly with the machine's full range of
+          motion, protecting the axes from chalk dust while it draws.
+        </p>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_1.STL" download>↓ Style 1 — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_1.SLDPRT" download>↓ Style 1 — SolidWorks</a>
+        </div>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_2.STL" download>↓ Style 2 — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_2.SLDPRT" download>↓ Style 2 — SolidWorks</a>
+        </div>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_3.STL" download>↓ Style 3 — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_3.SLDPRT" download>↓ Style 3 — SolidWorks</a>
+        </div>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_4.STL" download>↓ Style 4 (final) — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Telescopic_Tube_Style_4.SLDPRT" download>↓ Style 4 (final) — SolidWorks</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>The Remote Enclosure</h3>
+        <p>
+          The housing for the remote's electronics — trigger, top
+          button, and all — went through nine rounds of modeling,
+          slicing, and printing before landing on its final form: a
+          smooth, tapered, teardrop-like shape with two buttons
+          shaped to feel satisfying to press.
+        </p>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_1.STL" download>↓ Style 1 — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_1.SLDPRT" download>↓ Style 1 — SolidWorks</a>
+        </div>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_3.STL" download>↓ Style 3 — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_3.SLDPRT" download>↓ Style 3 — SolidWorks</a>
+        </div>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_4.STL" download>↓ Style 4 (final) — STL</a>
+          <a class="download-btn" href="../placeholder_assets/Remote_Style_4.SLDPRT" download>↓ Style 4 (final) — SolidWorks</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>End Effector — Rack & Pinion Chalk Holder</h3>
+        <p>
+          The team worked out a rack-and-pinion mechanism for the
+          chalk holder, adapting an existing rack-and-pinion print to
+          drive it. A few concepts led the way there:
+        </p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-30_at_14_52_31.jpeg"
+             alt="Early-stage end effector design — ball-transfer roller and mounting flange">
+        <p class="caption">Early-stage end effector design — a ball-transfer roller and flange, explored for smooth, low-friction gliding across the board</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-30_at_14_52_40.jpeg"
+             alt="Board magnet mount — block with two magnet wells">
+        <p class="caption">Board magnet mount — holds the end effector flush against the board alongside the machine's main magnetic mount</p>
+        <img src="../placeholder_assets/WhatsApp_Image_2026-07-30_at_14_52_57.jpeg"
+             alt="Single-Output End Effector Stabilizer">
+        <p class="caption">Single-Output End Effector Stabilizer — keeps the chalk holder steady and aligned mid-stroke</p>
+        <p>
+          A multicolor version of the end effector, designed in
+          OnShape, is ready to go as a v2 upgrade — letting Chalkbot
+          switch chalk colors mid-drawing.
+        </p>
+        <div class="download-row">
+          <a class="download-btn" href="../placeholder_assets/rack_and_pinion_copy.gcode" download>↓ Rack & Pinion — G-code</a>
+          <a class="download-btn" href="../placeholder_assets/single_color_chalk_holder_0_4n_0_28mm_PLA_MK4S_42m.bgcode" download>↓ Chalk Holder — Print File</a>
+          <a class="download-btn" href="../placeholder_assets/chalk_trial_1_0_4n_0_2mm_PLA_MK4S_6h28m.bgcode" download>↓ Chalk Trial — Print File</a>
+        </div>
+        <a class="ext-link" href="https://cad.onshape.com/documents/da23bedafffca2fa47c3c0a4/w/07be11901c60afcc658c0d80/e/63caf09f2968bed936b0491d?renderMode=0&uiState=6a6b95abe724d95cf892cc43" target="_blank" rel="noopener">
+          → OnShape — Multicolor End Effector (v2)
+        </a>
+      </div>
+    </div>
+
+    <!-- PART 3 -->
+    <h2>Part 3: Electronics & Control</h2>
+    <span class="sensor-tag">Matthew + Mert · MPU6050 · Wireless Remote</span>
+
+    <div class="process-step">
+      <p class="step-number">01</p>
+      <div class="step-content">
+        <h3>Assembly & the Rebuild</h3>
+        <p>
+          The machine's electronics were wired and assembled early
+          on, then rebuilt from scratch partway through once we
+          traced a mismatch against the schematic — the rebuild is
+          what finally got the machine moving reliably.
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">02</p>
+      <div class="step-content">
+        <h3>The Remote's Brain — MPU6050</h3>
+        <p>
+          The remote's gesture sensing is built around an MPU6050, a
+          6-axis inertial measurement unit combining a 3-axis
+          gyroscope with a 3-axis accelerometer on one chip. The
+          gyroscope measures rotational (angular) velocity around
+          each axis, while the accelerometer measures linear
+          acceleration — including the constant pull of gravity,
+          which lets the board infer its tilt relative to the ground.
+          Combining both signals gives a stable read on the remote's
+          orientation as you move it, which gets translated into
+          motion on the machine.
+        </p>
+      </div>
+    </div>
+
+    <div class="process-step">
+      <p class="step-number">03</p>
+      <div class="step-content">
+        <h3>Remote Control Logic</h3>
+        <p>
+          The remote has two inputs: a trigger and a top button.
+          Holding the trigger down engages draw mode; the top button
+          toggles between free-move and draw mode.
+        </p>
+      </div>
+    </div>
+
+    <!-- CODE -->
+    <h2>The Code</h2>
+    <pre class="code-block"><code>// Chalkbot — Final Control Code
+// Remote (MPU6050 + buttons) talks to the machine over ESP-NOW;
+// gesture data drives the X/Y steppers, and button state switches
+// between free-move and draw mode.
+
+#include &lt;AccelStepper.h&gt;
+#include &lt;espnow.h&gt;
+#include &lt;Wire.h&gt;
+#include &lt;MPU6050.h&gt;
+
+// ---- Machine (receiver) pins ----
+const int stepPinX = D4;
+const int dirPinX  = D5;
+const int stepPinY = D9;
+const int dirPinY  = D7;
+
+AccelStepper motorX(1, stepPinX, dirPinX);
+AccelStepper motorY(1, stepPinY, dirPinY);
+
+// ---- Remote input state (received wirelessly) ----
+bool triggerHeld = false;   // B1 — held down = draw mode
+bool modeToggle  = false;   // B2 — toggles free-move vs draw
+
+void setup() {
+  Serial.begin(115200);
+  motorX.setMaxSpeed(4000);
+  motorY.setMaxSpeed(4000);
+}
+
+void loop() {
+  // Read gesture data (pitch/roll) and button states from the remote
+  // Map gesture to X/Y target position or velocity
+  // Engage the chalk holder when the trigger is held; lift when released
+  // Toggle free-move vs draw mode with the top button
+
+  motorX.run();
+  motorY.run();
+}</code></pre>
+
+    <!-- APPENDIX -->
+    <h2>Appendix — Early Prototype Code</h2>
+    <p>
+      From the exploration phase, before the pivot — a simple test
+      accelerating both wheels of the magnetic vehicle prototype in
+      alternating directions.
+    </p>
+    <pre class="code-block"><code>#include &lt;AccelStepper.h&gt;
+
+const int stepPin1 = D4; // LEFT WHEEL
+const int dirPin1 = D5;
+const int stepPin2 = D9;
+const int dirPin2 = D7;
+
+const int NUM_STEPPERS = 2;
+AccelStepper steppers[NUM_STEPPERS] = {
+  AccelStepper(1, stepPin1, dirPin1),
+  AccelStepper(1, stepPin2, dirPin2)
+};
+
+void setup() {
+}
+
+int spinDirection = 1;
+
+void loop() {
+  for (int currentStepper = 0; currentStepper &lt; NUM_STEPPERS - 1; currentStepper++) {
+    spinDirection = spinDirection * -1;
+    int maxSpeed = 4000 * spinDirection;
+    int speed = 4000 * spinDirection;
+    AccelStepper &amp;stepper = steppers[currentStepper];
+    stepper.setMaxSpeed(maxSpeed);
+    stepper.setSpeed(speed);
+    stepper.runSpeed();
+  }
+}</code></pre>
+
+    <!-- TEAM -->
+    <h2>The Team</h2>
+
+    <p>
+      <strong>Arden</strong> — sourced materials for the build.<br>
+      <strong>Gurmani</strong> — CAD design and fabrication: the axis cover, remote enclosure, and end effector mounting hardware.<br>
+      <strong>Matthew</strong> — magnetic blackboard mount, machine electronics, remote circuit and gesture coding.<br>
+      <strong>Mert</strong> — circuit assembly and the multicolor end effector design.<br>
+      <strong>Omer</strong> — end effector concept exploration.
+    </p>
+
+  </section>
+</body>
+
+<footer></footer>
+<script src="../config.js"></script>
+<script src="../slideshow.js"></script>
 </html>
