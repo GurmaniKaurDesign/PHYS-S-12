@@ -101,7 +101,6 @@
     .bom-cat.pneumatics  { background: #d8e8d0; color: #2f5a2f; }
     .bom-cat.structure   { background: #f0e6c8; color: #8a6a1f; }
     .bom-cat.sensing     { background: #f0d8e8; color: #6b1a4a; }
-    .tbd { color: var(--accent-color); font-family: var(--mono-font-family); font-size: 0.78rem; }
     .process-step {
       display: grid;
       grid-template-columns: 40px 1fr;
@@ -159,23 +158,30 @@
       margin: 1rem 0;
       white-space: pre;
     }
-    .oscilloscope-placeholder {
-      border: 2px dashed var(--secondary-color);
-      border-radius: 4px;
-      padding: 3rem 2rem;
-      text-align: center;
-      margin: 1rem 0;
+    .persona-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin: 1rem 0 1.5rem;
     }
-    .oscilloscope-placeholder p {
-      color: var(--accent-color);
+    .persona-pill {
       font-family: var(--mono-font-family);
-      font-size: 0.8rem;
-      margin: 0;
-      letter-spacing: 0.08em;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid var(--secondary-color);
+      border-radius: 2px;
+    }
+    .img-duo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin: 1rem 0;
     }
     @media (max-width: 768px) {
       .two-col { grid-template-columns: 1fr; }
       .process-step { grid-template-columns: 30px 1fr; gap: 1rem; }
+      .img-duo { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -243,10 +249,7 @@
       controls the pump and solenoid valve until the correct
       pressure is reached independently in each zone.
     </p>
-    <img src="../placeholder_assets/Sewing.jpeg"
-         alt="Embrace concept — soft robotics approach">
-    <p class="caption">Sewing Flat Pattern with Electronics Schematic</p>
-
+    
     <div class="two-col">
       <div class="two-col-block">
         <h3>Self-Sizing</h3>
@@ -289,13 +292,9 @@
       </div>
     </div>
 
-    <!--  SYSTEM ARCHITECTURE  -->
+    <!-- SYSTEM ARCHITECTURE -->
     <h2>System Architecture</h2>
 
-     <img src="../placeholder_assets/Components.jpeg"
-         alt="Embrace concept — soft robotics approach", width="600">
-    <p class="caption">Components Required for Electronics</p>
-    
     <div class="system-grid">
       <div class="system-block">
         <p class="sys-tag">Input</p>
@@ -305,22 +304,22 @@
       <div class="system-block">
         <p class="sys-tag">Controller</p>
         <h3>XIAO ESP32-C3</h3>
-        <p>Maps pressure to fit zones: too loose, good fit, too tight — controls pump and valve independently</p>
+        <p>Maps pressure to fit zones: too loose, good fit, too tight — controls pump and valves independently</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output A</p>
         <h3>Mini Air Pump</h3>
-        <p>Pressurises the system: detachable once the brace reaches target fit</p>
+        <p>Pressurises the system, shared across all three actuator zones</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Output B</p>
-        <h3>Solenoid Valve</h3>
-        <p>Distributes air to McKibben actuator pockets: controls inflation per zone</p>
+        <h3>3-Way Solenoid Valves</h3>
+        <p>Distributes air to each McKibben actuator zone independently, timed for differential inflation</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Actuator</p>
         <h3>McKibben Muscles</h3>
-        <p>Handmade from latex tubing + braided mesh: expand radially under pressure to conform to neck</p>
+        <p>Handmade from latex tubing + braided mesh: expand radially under pressure to conform to the neck</p>
       </div>
       <div class="system-block">
         <p class="sys-tag">Structure</p>
@@ -329,117 +328,117 @@
       </div>
     </div>
 
-    <!--  MVP -->
-    <h2>MVP: Proof of Concept</h2>
+    <!-- BUILD -->
+    <h2>Building Embrace</h2>
     <p>
-      The MVP demonstrates the core Embrace concept as a
-      wearable prototype: a sewn spandex brace with embedded
-      pressure sensing and pneumatic self-sizing. This is a
-      proof of concept for both form and function — the first
-      time all the components came together in a single
-      wearable object.
+      A sewn spandex brace with embedded pressure sensing and
+      pneumatic self-sizing — the first time all the components
+      came together in a single wearable object.
     </p>
 
     <div class="process-step">
       <p class="step-number">01</p>
       <div class="step-content">
-        <h3>The Brace: Sewn Spandex Shell</h3>
+        <h3>Pattern & Materials</h3>
         <p>
-          Sewn by hand on a sewing machine — first time
-          using one. Pink spandex chosen for its calming
-          quality and stretch properties that accommodate
-          inflation. Internal pockets with sleeves hold
-          the McKibben actuators in position around the
-          neck. The Velostat FSR is sandwiched inside
-          the fabric layers at the neck contact point.
+          Drafted the flat pattern by hand, then cut and marked
+          it in pink spandex — chosen for its stretch and
+          breathability. Sewn on a machine for the first time,
+          using a digital caliper to keep pocket dimensions
+          consistent.
         </p>
-        <video controls muted loop playsinline>
-          <source src="../placeholder_assets/guruarm.mp4"
-                  type="video/mp4">
-        </video>
-        <p class="caption">Sewn spandex brace — internal pockets for McKibben actuators, embedded FSR</p>
+        <img src="../placeholder_assets/materials_sewing.jpeg"
+             alt="Sewing tools and materials — ruler, calipers, tape, pattern paper, rotary cutter, scissors, thread">
+        <p class="caption">Tools and materials for the pattern and build</p>
       </div>
     </div>
 
     <div class="process-step">
       <p class="step-number">02</p>
       <div class="step-content">
-        <h3>The Circuit: Pump + Solenoid + MOSFET</h3>
+        <h3>Embedding the FSR</h3>
         <p>
-          XIAO ESP32-C3 controls a mini air pump and
-          solenoid valve via N-channel MOSFETs. The pump
-          pressurises the system; the solenoid valve
-          distributes air into the actuator pockets.
-          Powered by a bench power supply for the MVP —
-          a portable 12V solution is planned for v2.
-          The FSR reads pressure on analog pin A0 and
-          the loop closes when target fit is detected.
+          The handmade Velostat/copper-tape pressure sensor is
+          sandwiched directly into the fabric at the neck contact
+          point, wired out through the shell before the pockets
+          are closed up.
         </p>
+        <img src="../placeholder_assets/fsr_embedding_1.jpeg"
+             alt="Copper tape FSR sandwich sewn into the pink spandex pattern piece, wires leading out">
+        <p class="caption">FSR sandwich embedded into the fabric, wired out for the controller</p>
         <div class="img-duo">
-          <img src="../placeholder_assets/embrace_circuit.jpeg"
-               alt="MVP circuit — XIAO, MOSFET, pump, solenoid">
-          <img src="../placeholder_assets/embrace_serial.jpeg"
-               alt="Serial Monitor — live pressure readings">
+          <img src="../placeholder_assets/fsr_embedding_2.jpeg"
+               alt="Sewn sensor pockets and the actuator sleeve opening on the pattern piece">
+          <img src="../placeholder_assets/fsr_embedding_3.jpeg"
+               alt="Reverse side of the pattern piece showing the sewn pockets and mesh actuator opening">
         </div>
-        <p class="caption">Left: MVP circuit · Right: Serial Monitor — pressure classification live</p>
-
-        <video controls muted loop playsinline>
-          <source src="../placeholder_assets/embrace_1.mp4"
-                  type="video/mp4">
-        </video>
-        <video controls muted loop playsinline>
-          <source src="../placeholder_assets/embrace_2.mp4"
-                  type="video/mp4">
-        </video>
-        <video controls muted loop playsinline>
-          <source src="../placeholder_assets/embrace_3.mp4"
-                  type="video/mp4">
-        </video>
-        <p class="caption">Circuit in operation: pump inflating McKibben actuators via solenoid valve</p>
+        <p class="caption">Sensor pockets and the actuator sleeve opening, sewn into the pattern</p>
       </div>
     </div>
 
     <div class="process-step">
       <p class="step-number">03</p>
       <div class="step-content">
-        <!-- <h3>System Demo — Brace + Electronics Together</h3>
+        <h3>Assembling the Actuators</h3>
+        <p>
+          Three McKibben actuator zones, each fed by its own
+          tubing run: two smaller actuators sit at the front of
+          the neck, and one larger actuator wraps the back — sized
+          and routed to inflate to different targets from the
+          same shared pump.
+        </p>
+        <img src="../placeholder_assets/McKibben_embedding.jpeg"
+             alt="Six McKibben actuator sleeves inserted into the fabric pockets with tubing routed out">
+        <p class="caption">Actuators seated in their pockets, tubing routed out to the valve manifold</p>
+        <img src="../placeholder_assets/test_fit.jpeg"
+             alt="Early brace shell fitted onto a mannequin bust for a fit test">
+        <p class="caption">Early fit test on a mannequin bust with tailer's chalk markings for precision</p>
+
         <video controls muted loop playsinline>
-          <source src="../placeholder_assets/WhatsApp_Video_2026-07-22_at_00_46_21.mp4"
-                  type="video/mp4">
+          <source src="../placeholder_assets/template_vid.mp4" type="video/mp4">
         </video>
-        <p class="caption">Full system demo — brace worn, FSR reading pressure, pump inflating actuators</p>
+        <p class="caption">The template creation process to make the flat pattern</p>
       </div>
-    </div> -->
+    </div>
 
     <div class="process-step">
       <p class="step-number">04</p>
       <div class="step-content">
-        <h3>Oscilloscope Measurement</h3>
+        <h3>The Circuit: Pump + Solenoids + MOSFETs</h3>
         <p>
-          Output signal from the solenoid valve control
-          pin measured on the oscilloscope, confirming
-          the MOSFET switching cleanly between HIGH and
-          LOW states in response to FSR pressure readings.
-          The waveform shows clean digital switching with
-          no significant noise on the control signal.
+          A XIAO ESP32-C3 reads the FSR on an analog pin and
+          drives the pump and three solenoid valves through their
+          own MOSFET stages — a boost converter steps the supply
+          up for the pump and valves while the XIAO runs on its
+          own 3.3V logic. The front and back zones are timed
+          independently so the front stays at a lower inflation
+          than the back.
         </p>
-        <!-- <div class="oscilloscope-placeholder">
-          <p>OSCILLOSCOPE READING — TO BE ADDED</p>
+        <div class="img-duo">
+          <img src="../placeholder_assets/final_circuit.jpeg"
+               alt="Final circuit — XIAO, MOSFET driver board, boost converter, pump, and 3-way solenoid manifold">
+          <img src="../placeholder_assets/final_circuit_closeup.jpeg"
+               alt="Final circuit close-up — pump and solenoid manifold with tubing connections">
         </div>
-        <p class="caption">Oscilloscope — solenoid valve control signal, measured at the lab</p> -->
+        <p class="caption">The final circuit — pump, valve manifold, and driver electronics</p>
+
+        <video controls muted loop playsinline>
+          <source src="../placeholder_assets/circuit_working.mp4" type="video/mp4">
+        </video>
+        <p class="caption">The moment the closed loop finally worked end to end — FSR reading, pump responding</p>
       </div>
     </div>
 
-    <!--  CODE -->
+    <!-- CODE -->
     <h2>Code</h2>
     <p>
-      C++ for XIAO ESP32-C3. Uses C++ class structure,
+      C++ for XIAO ESP32-C3. Uses a C++ class structure,
       <code>millis()</code> for non-blocking timing — no
       <code>delay()</code> calls. Closed-loop: FSR reads
-      pressure, pump inflates until target, solenoid holds.
+      pressure, pump inflates until target, solenoids hold.
     </p>
 
-    <div class="code-block">// Embrace MVP — Self-Sizing Brace
+    <div class="code-block">// Embrace — Self-Sizing Brace
 // Velostat FSR on A0 | Pump on D9 | Solenoid on D10
 // XIAO ESP32-C3 | No delay() | C++ class structure
 
@@ -447,7 +446,7 @@ const int FSR_PIN  = A0;
 const int PUMP_PIN = D9;
 const int SOL_PIN  = D10;
 
-// Tune by watching Serial Monitor while wearing brace
+// Tune by watching Serial Monitor while wearing the brace
 const int TOO_LOOSE   = 150;
 const int GOOD_FIT    = 450;
 const int TOO_TIGHT   = 700;
@@ -483,22 +482,18 @@ class BraceController {
       int p = readPressure();
 
       if (p &lt; looseThr) {
-        // Not worn — inflate
         digitalWrite(pumpPin, HIGH);
         digitalWrite(solPin,  LOW);
 
       } else if (p &lt; fitThr) {
-        // Too loose — keep inflating
         digitalWrite(pumpPin, HIGH);
         digitalWrite(solPin,  LOW);
 
       } else if (p &lt;= tightThr) {
-        // Good fit — hold pressure
         digitalWrite(pumpPin, LOW);
         digitalWrite(solPin,  LOW);
 
       } else {
-        // Too tight — vent
         digitalWrite(pumpPin, LOW);
         digitalWrite(solPin,  HIGH);
       }
@@ -522,23 +517,54 @@ BraceController brace(FSR_PIN, PUMP_PIN, SOL_PIN,
 void setup() {
   Serial.begin(115200);
   brace.begin();
-  Serial.println("=== Embrace MVP Ready ===");
+  Serial.println("=== Embrace Ready ===");
 }
 
 void loop() {
   brace.update();
 }</div>
 
-    <!-- PREVIOUS POC  -->
-    <h2>Previous Proof of Concept</h2>
+    <!-- PRESENTING EMBRACE -->
+    <h2>Presenting Embrace</h2>
     <p>
-      Week 4's programming assignment was the first live test
-      of Embrace's sensing loop — handmade Velostat FSR and
-      McKibben actuator, closed-loop inflation logic on Arduino.
+      Embrace showed at the PS70 final exhibition, presented
+      alongside Professor Nathan Melenbrink.
     </p>
-    <a class="proof-link" href="../04_microcontroller/index.html">
-      → View Week 4 documentation
-    </a>
+    <img src="../placeholder_assets/final_day_pres.jpeg"
+         alt="Gurmani and Professor Nathan Melenbrink at the Embrace exhibition table">
+    <p class="caption">With Professor Nathan Melenbrink at the final exhibition</p>
+
+    <img src="../placeholder_assets/final_day_pres_display.jpeg"
+         alt="Final exhibition table — brace on a mannequin head, poster, persona name tags, and NFC info cards">
+    <p class="caption">The final table — brace on display, persona tags, poster, and NFC cards</p>
+
+    <h3>The Personas</h3>
+    <p>
+      For the live walkthrough, six 3D-printed name tags stood in
+      for six personas — each one framing a different way someone
+      interacts with Embrace, used to guide the audience through
+      the product feature by feature.
+    </p>
+    <div class="persona-row">
+      <span class="persona-pill">River</span>
+      <span class="persona-pill">Atlas</span>
+      <span class="persona-pill">Breeze</span>
+      <span class="persona-pill">Dash</span>
+      <span class="persona-pill">Ivy</span>
+      <span class="persona-pill">Karta</span>
+    </div>
+    <img src="../placeholder_assets/print_embed.jpeg"
+         alt="Six 3D-printed persona name tags mid-print, one with an embedded NFC chip">
+    <p class="caption">The persona name tags, fresh off the printer</p>
+
+    <h3>Karta — the tap-to-connect card</h3>
+    <p>
+      Karta means "creator." Its tag has an NFC chip embedded
+      inside, written with a LinkedIn link. Every visitor's demo
+      ended the same way: phones out, a tap of the Karta tag
+      against the screen, and an instant connection request —
+      a small piece of "magic" to close on.
+    </p>
 
     <!-- BOM -->
     <h2>Bill of Materials</h2>
@@ -553,7 +579,7 @@ void loop() {
       <tr>
         <td>1</td>
         <td>XIAO ESP32-C3</td>
-        <td>Microcontroller — reads FSR, controls pump and solenoid</td>
+        <td>Microcontroller — reads FSR, controls pump and solenoids</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
         <td>1</td>
       </tr>
@@ -573,24 +599,24 @@ void loop() {
       </tr>
       <tr>
         <td>4</td>
-        <td>Mini air pump (AheadPump)</td>
-        <td>Pressurises system — detachable post-fit</td>
+        <td>Mini air pump</td>
+        <td>Pressurises the system, shared across all zones</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
         <td>1</td>
       </tr>
       <tr>
         <td>5</td>
-        <td>Solenoid valve (normally closed)</td>
-        <td>Distributes air to actuator zones</td>
+        <td>3-way solenoid valves</td>
+        <td>Independent air distribution per actuator zone</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td>1</td>
+        <td>3</td>
       </tr>
       <tr>
         <td>6</td>
-        <td>N-channel MOSFET (IRLZ44N)</td>
-        <td>Drives pump and solenoid from 3.3V logic</td>
+        <td>N-channel MOSFETs (IRLZ44N)</td>
+        <td>Drive pump and valves from 3.3V logic</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
-        <td>2</td>
+        <td>4</td>
       </tr>
       <tr>
         <td>7</td>
@@ -601,44 +627,50 @@ void loop() {
       </tr>
       <tr>
         <td>8</td>
-        <td>Flyback diode (1N4007)</td>
-        <td>Protects MOSFET from solenoid back-EMF</td>
+        <td>Flyback diodes (1N4007)</td>
+        <td>Protect MOSFETs from solenoid/pump back-EMF</td>
         <td><span class="bom-cat electronics">Electronics</span></td>
-        <td>2</td>
+        <td>4</td>
       </tr>
       <tr>
         <td>9</td>
+        <td>Boost converter module</td>
+        <td>Steps supply voltage up for pump and solenoids</td>
+        <td><span class="bom-cat electronics">Electronics</span></td>
+        <td>1</td>
+      </tr>
+      <tr>
+        <td>10</td>
         <td>Pink spandex fabric</td>
         <td>Brace shell — stretch, breathability, calming colour</td>
         <td><span class="bom-cat structure">Structure</span></td>
         <td>~0.5m</td>
       </tr>
       <tr>
-        <td>10</td>
+        <td>11</td>
         <td>Pneumatic tubing + connectors</td>
-        <td>Air routing from pump to solenoid to actuators</td>
+        <td>Air routing from pump to solenoids to actuators</td>
         <td><span class="bom-cat pneumatics">Pneumatics</span></td>
-        <td>TBD</td>
+        <td>—</td>
       </tr>
       <tr>
-        <td>11</td>
-        <td>Bench power supply (12V)</td>
-        <td>Powers pump — to be replaced with portable 12V battery pack</td>
-        <td><span class="bom-cat electronics">Electronics</span></td>
-        <td>1</td>
+        <td>12</td>
+        <td>3D-printed persona tags + NFC chip</td>
+        <td>Presentation aids — persona walkthrough and the Karta tap-to-connect card</td>
+        <td><span class="bom-cat structure">Structure</span></td>
+        <td>6</td>
       </tr>
     </table>
 
     <!-- NEXT STEPS -->
-    <h2>Next Steps: Final version</h2>
+    <h2>Next Steps: Version 2</h2>
 
     <div class="next-steps">
-      <h3>From proof of concept to device</h3>
+      <h3>From exhibition prototype to device</h3>
       <ul>
-        <li><strong>Portable power</strong> — replace bench supply with a compact 12V battery pack so the brace is untethered</li>
-        <li><strong>Electronics backpack</strong> — 3D print a PLA/TPU hybrid housing: rigid PLA compartments for electronics waterproofing, flexible TPU shell with laser-cut ventilation cuts for breathability</li>
-        <li><strong>Multi-zone inflation</strong> — expand from one solenoid to independent zone control for front and back actuator groups</li>
-        <li><strong>Commercial FSR + actuators</strong> — replace handmade components with calibrated commercial equivalents for consistent pressure readings</li>
+        <li><strong>Portable power</strong> — a compact battery pack so the brace is fully untethered</li>
+        <li><strong>Electronics backpack</strong> — a 3D-printed PLA/TPU hybrid housing: rigid PLA compartments for the electronics, flexible TPU shell with laser-cut ventilation for breathability</li>
+        <li><strong>Commercial FSR + actuators</strong> — calibrated commercial equivalents for more consistent pressure readings</li>
         <li><strong>Sewing refinement</strong> — tighter pocket tolerances, reinforced seams at actuator attachment points, cleaner sleeve construction</li>
         <li><strong>Clinical feedback</strong> — connect with medical device researchers at Harvard and MIT to validate pressure targets against cervical collar standards</li>
       </ul>
