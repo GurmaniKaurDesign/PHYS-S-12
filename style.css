@@ -259,7 +259,8 @@ footer #year {
 /* Intro section */
 #intro {
   padding: 6rem 5vw;
-  max-width: 700px;
+  max-width: 1400px;
+  margin: 0 auto;
   border-top: 1px solid var(--secondary-color);
 }
 
@@ -316,7 +317,8 @@ footer #year {
   grid-template-columns: 1fr 1.6fr;
   gap: 5vw;
   align-items: start;
-  max-width: 1100px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .about-hero img {
@@ -339,7 +341,8 @@ footer #year {
 .resume {
   padding: 4rem 5vw 2rem;
   border-top: 1px solid var(--secondary-color);
-  max-width: 900px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .resume-block {
@@ -377,7 +380,8 @@ footer #year {
 /* Blog / weekly assignment pages */
 .blog {
   padding: calc(64px + 6vh) 5vw 4rem;
-  max-width: 860px;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
 .blog h1 {
@@ -517,7 +521,8 @@ iframe, video {
 .featured-project {
   padding: 4rem 5vw;
   border-top: 1px solid var(--secondary-color);
-  max-width: 1200px;
+  max-width: 1500px;
+  margin: 0 auto;
 }
 
 .featured-project > h3 {
