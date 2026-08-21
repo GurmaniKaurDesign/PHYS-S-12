@@ -1,6 +1,6 @@
 var config = {
   student_name: "Gurmani Kaur",
-  student_nickname: "Guru",
+  student_nickname: "Gurmani",
   student_year_sem: "Summer 2026",
   student_email: "gurmanikaur3571@gmail.com",
  
